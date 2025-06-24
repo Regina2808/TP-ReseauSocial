@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashbord Administrateur </title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .sidebar {
+      min-height: 100vh;
+      background-color: #0d6efd;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    .card-metric {
+      min-height: 120px;
+    }
+  </style>
+</head>
+<body>
+   <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Social Media Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+    }
+    .sidebar {
+      min-height: 100vh;
+      background-color: #0d6efd;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 0.375rem;
+      padding-left: 0.5rem;
+    }
+    .card-metric {
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <nav class="col-md-2 sidebar d-flex flex-column p-3">
+      <h4 class="text-white mb-4">SocialDash</h4>
+      <ul class="nav nav-pills flex-column gap-2">
+        <li><a href="#" class="nav-link text-white">Vue d'ensemble</a></li>
+        <li><a href="#" class="nav-link text-white">Analytiques</a></li>
+        <li><a href="#" class="nav-link text-white">Messages</a></li>
+        <li><a href="#" class="nav-link text-white">Audience</a></li>
+        <li><a href="#" class="nav-link text-white">Contenu</a></li>
+        <li><a href="#" class="nav-link text-white">Objectifs</a></li>
+        <li><a href="#" class="nav-link text-white">Paramètres</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main content -->
+    <main class="col-md-10 p-4">
+
+    <!-- Topbar -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3 class="mb-0">Tableau de bord</h3>
+
+  <div class="d-flex align-items-center gap-3">
+    <!-- Nom + Avatar -->
+    <div class="d-flex align-items-center">
+      <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="User Avatar" style="width: 40px; height: 40px;">
+      <span class="fw-semibold">Admin</span>
+    </div>
+    
+    <!-- Bouton Déconnexion -->
+    <a href="#" class="btn btn-outline-danger btn-sm">Déconnexion</a>
+  </div>
+</div>
+
+
+      <!-- Statistiques principales -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="card shadow card-metric text-center p-3">
+            <h5 class="fw-bold">Abonnés</h5>
+            <p class="fs-4 mb-1">12 500</p>
+            <span class="text-success">+5.2%</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow card-metric text-center p-3">
+            <h5 class="fw-bold">J'aime</h5>
+            <p class="fs-4 mb-1">8 900</p>
+            <span class="text-success">+12.3%</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow card-metric text-center p-3">
+            <h5 class="fw-bold">Commentaires</h5>
+            <p class="fs-4 mb-1">2 100</p>
+            <span class="text-success">+8.1%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engagement cette semaine -->
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          Engagement cette semaine
+        </div>
+        <div class="card-body">
+          <canvas id="engagementChart" height="150"></canvas>
+        </div>
+      </div>
+
+      <!-- Audience par âge -->
+      <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+          Audience par âge
+        </div>
+        <div class="card-body">
+          <canvas id="audienceAgeChart" height="180"></canvas>
+        </div>
+      </div>
+
+      <!-- Performance du jour -->
+      <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+          Performance du jour
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-md-4">
+              <h5 class="mb-0">+2 847</h5>
+              <small class="text-muted">Nouvelles vues</small>
+            </div>
+            <div class="col-md-4">
+              <h5 class="mb-0">+127</h5>
+              <small class="text-muted">Nouveaux abonnés</small>
+            </div>
+            <div class="col-md-4">
+              <h5 class="mb-0">+456</h5>
+              <small class="text-muted">Interactions</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Objectifs -->
+      <div class="card mb-4">
+        <div class="card-header bg-warning">
+          Objectifs du mois
+        </div>
+        <div class="card-body">
+          <p class="mb-1">Abonnés <span class="float-end">83%</span></p>
+          <div class="progress mb-3" style="height: 10px;">
+            <div class="progress-bar bg-primary" style="width: 83%;"></div>
+          </div>
+
+          <p class="mb-1">Engagement <span class="float-end">67%</span></p>
+          <div class="progress" style="height: 10px;">
+            <div class="progress-bar bg-success" style="width: 67%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activité récente -->
+      <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+          Activité récente
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Marie Dubois a aimé votre publication <span class="text-muted float-end">il y a 2 min</span></li>
+          <li class="list-group-item">Jean Martin a commenté votre photo <span class="text-muted float-end">il y a 5 min</span></li>
+          <li class="list-group-item">Sophie Bernard a commencé à vous suivre <span class="text-muted float-end">il y a 10 min</span></li>
+          <li class="list-group-item">Pierre Leroy a partagé votre article <span class="text-muted float-end">il y a 15 min</span></li>
+          <li class="list-group-item">Emma Wilson a aimé votre story <span class="text-muted float-end">il y a 20 min</span></li>
+        </ul>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  const ctx = document.getElementById('engagementChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+      datasets: [
+        {
+          label: 'Facebook',
+          data: [2, 3, 9, 4, 2, 5, 4],
+          borderColor: 'green',
+          fill: false
+        },
+        {
+          label: 'Twitter',
+          data: [1, 2, 1, 2, 2, 1, 2],
+          borderColor: 'blue',
+          fill: false
+        },
+        {
+          label: 'Instagram',
+          data: [4, 5, 5, 6, 7, 5, 6],
+          borderColor: 'orange',
+          fill: false
+        }
+      ]
+    }
+  });
+
+  const ctx2 = document.getElementById('audienceAgeChart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+      datasets: [
+        {
+          label: 'Hommes',
+          data: [25, 35, 30, 20, 10],
+          backgroundColor: 'rgba(54, 162, 235, 0.8)'
+        },
+        {
+          label: 'Femmes',
+          data: [30, 28, 32, 18, 12],
+          backgroundColor: 'rgba(255, 99, 132, 0.8)'
+        }
+      ]
+    }
+  });
+</script>
+
+</body>
+</html>
+ 
+</body>
+</html>
