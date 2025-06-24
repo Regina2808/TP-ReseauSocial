@@ -67,14 +67,43 @@
     <nav class="col-md-2 sidebar d-flex flex-column p-3">
       <h4 class="text-white mb-4">SocialDash</h4>
       <ul class="nav nav-pills flex-column gap-2">
-        <li><a href="#" class="nav-link text-white">Vue d'ensemble</a></li>
-        <li><a href="#" class="nav-link text-white">Analytiques</a></li>
-        <li><a href="#" class="nav-link text-white">Messages</a></li>
-        <li><a href="#" class="nav-link text-white">Audience</a></li>
-        <li><a href="#" class="nav-link text-white">Contenu</a></li>
-        <li><a href="#" class="nav-link text-white">Objectifs</a></li>
-        <li><a href="#" class="nav-link text-white">Paramètres</a></li>
-      </ul>
+  <li>
+    <a href="#" class="nav-link text-white">
+      <i class="bi bi-speedometer2 me-2"></i> Vue d'ensemble
+    </a>
+  </li>
+  <li>
+    <a href="#" class="nav-link text-white">
+      <i class="bi bi-bar-chart-line me-2"></i> Analytiques
+    </a>
+  </li>
+  <li>
+    <a href="#" class="nav-link text-white">
+      <i class="bi bi-chat-dots me-2"></i> Messages
+    </a>
+  </li>
+  <li>
+    <a href="#" class="nav-link text-white">
+      <i class="bi bi-people-fill me-2"></i> Audience
+    </a>
+  </li>
+  <li>
+    <a href="#" class="nav-link text-white">
+      <i class="bi bi-images me-2"></i> Contenu
+    </a>
+  </li>
+  <li>
+    <a href="#" class="nav-link text-white">
+      <i class="bi bi-bullseye me-2"></i> Objectifs
+    </a>
+  </li>
+  <li>
+    <a href="#" class="nav-link text-white">
+      <i class="bi bi-gear me-2"></i> Paramètres
+    </a>
+  </li>
+</ul>
+
     </nav>
 
     <!-- Main content -->
