@@ -65,7 +65,7 @@
 
     <!-- Sidebar -->
     <nav class="col-md-2 sidebar d-flex flex-column p-3">
-      <h4 class="text-white mb-4">SocialDash</h4>
+      <h4 class="text-white mb-4">LookLive</h4>
       <ul class="nav nav-pills flex-column gap-2">
   <li>
     <a href="#" class="nav-link text-white">
