@@ -24,7 +24,7 @@
     
     <a class="navbar-brand d-flex align-items-center text-white "href="#">
        <img src="/assets/image/logolooklive-L.png" alt="OOKlive" class="rounded-circle" width="40" height="40">
-       <span class="h5 mb-0 text-primary" style="margin-left: 4px;">OOKLive</span>
+       <span class="h5 mb-0 text-primary" style="margin-left: 4px;">ookLive</span>
     </a>
    
     <form class="form-inline mx-auto d-none d-md-block">
@@ -39,10 +39,10 @@
         <a class="nav-link text-secondary" href="#"><i class="fas fa-tv fa-facebook-lg"></i></a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link text-secondary" href="#"><i class="fas fa-store fa-lg" ></i></a>
+        <a class="nav-link text-secondary" href="#"><i class="fas fa-store mr-2 fa-lg" ></i></a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link text-secondary" href="#"><i class="fas fa-users fa-lg"></i></a>
+        <a class="nav-link text-secondary" href="#"><i class="fas fa-users mr-2 fa-lg"></i></a>
       </li>
     </ul>
 
@@ -88,12 +88,31 @@
             <img src="" alt="" class="img-fluid rounded">
           </div>
 
-        <!-- systeme de gestion de like  -->
+        <!-- systeme de gestion de like et commentaire  -->
           <div class="btn-group" role="group">
-                <button id="likeBtn" type="button" class="btn btn-outline-primary">
+                
+                  <!-- Bouton pour afficher les commentaires -->
+                <button id="toggleCommentbtn" class="btn btn-secondary">
+                <i class="fas fa-chat-dots"></i> Commentaires
+                </button>
+                    <!-- partie commentaire cachée -->
+                <div id="commentSection" class="d-none" >
+                    <!-- liste des commentaire cachée -->
+                    <ul  id="Listcomment" class="list-group mb-3"></ul>
+                    <!-- champ du commentaire  -->
+                    <div class="input-group">
+                        <input type="Comment" type="text" class="form-control" placeholder="Ajouter un commentaire...">
+                        <!-- button d'envoie du commentaire -->
+                         <div class="input-group-append">
+                               <button id="Commentsubmit" class="btn btn-primary" type="button"><i class="bi bi-send"></i></button>
+                         </div>
+                    </div>
+                </div>
+                <!-- button like/deslike -->
+                <button id="btnlike" type="button" class="btn btn-outline-primary">
                     <i class="bi bi-hand-thumbs-up"></i> J’aime
                 </button>
-                <button id="dislikeBtn" type="button" class="btn btn-outline-secondary">
+                <button id="btndislike" type="button" class="btn btn-outline-primary">
                     <i class="bi bi-hand-thumbs-down"></i> Je n’aime pas
                 </button>
             </div>
