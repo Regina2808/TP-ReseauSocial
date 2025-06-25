@@ -28,7 +28,7 @@
     btndislike.innerHTML = '<i class="bi bi-hand-thumbs-down"></i> Je n’aime pas';
   }
 
-     //   foncton  d'activation de dislike 
+     //   fonction  d'activation de dislike 
 
   function activerDislike() {
     btndislike.classList.replace('btn-outline-primary', 'btn-primary');
@@ -38,20 +38,26 @@
   }
 
 
-
+   //récupération des champs avec leurs id  
   const togglecontentbtn = document.getElementById("togglecommentbtn");
   const commentSection = document.getElementById("commentSection");
   const commentList = document.getElementById("commentList");
   const comment = document.getElementById("comment");
   const commentsubmit = document.getElementById("commentsubmit");
 
+
+  //  pour faire coulisser le champs du commentaire en bas de la publication 
+  
+
   togglecontentbtn.addEventListener("click", () => {
     commentSection.classList.toggle("d-none");
   });
 
-    Commentsubmit.addEventListener("click", () => {
-    const comment = comment.value.trim();
-    console.log(comment)
+    commentsubmit.addEventListener("click", () => {
+    const comment ="";
+    
+    comment.value.trim();
+
     if (comment === "") {
       const li = document.createElement("li");
       li.className = "list-group-item";
