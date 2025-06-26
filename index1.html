@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Commentaires</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="bg-light p-5">
+
+ <div class="container mt-4">
+  <!-- POST 1 -->
+  <div class="card mb-3" data-post-id="post_1">
+    <div class="card-body">
+      <h5>Publication #1</h5>
+      <ul class="list-group mb-2 comment-list"></ul>
+      <div class="input-group">
+        <input type="text" class="form-control comment-input" placeholder="Commenter...">
+        <div class="input-group-append">
+          <button class="btn btn-primary comment-submit" type="button">
+            <i class="bi bi-send"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST 2 -->
+  <div class="card mb-3" data-post-id="post_2">
+    <div class="card-body">
+      <h5>Publication #2</h5>
+      <ul class="list-group mb-2 comment-list"></ul>
+      <div class="input-group">
+        <input type="text" class="form-control comment-input" placeholder="Commenter...">
+        <div class="input-group-append">
+          <button class="btn btn-primary comment-submit" type="button">
+            <i class="bi bi-send"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const posts = document.querySelectorAll("[data-post-id]");
+
+  posts.forEach(post => {
+    const postId = post.getAttribute("data-post-id");
+    const input = post.querySelector(".comment-input");
+    const button = post.querySelector(".comment-submit");
+    const list = post.querySelector(".comment-list");
+
+    let comments = JSON.parse(localStorage.getItem(postId)) || [];
+
+    const render = () => {
+      list.innerHTML = "";
+      comments.forEach((cmt, index) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `
+          <span>${cmt}</span>
+          <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+        `;
+        li.querySelector("button").addEventListener("click", () => {
+          comments.splice(index, 1);
+          localStorage.setItem(postId, JSON.stringify(comments));
+          render();
+        });
+        list.appendChild(li);
+      });
+    };
+
+    button.addEventListener("click", () => {
+      const value = input.value.trim();
+      if (value !== "") {
+        comments.push(value);
+        localStorage.setItem(postId, JSON.stringify(comments));
+        input.value = "";
+        render();
+      }
+    });
+
+    render();
+  });
+});
+
+
+
+
+
+//pour ajoute le non du use et la date ainsi que l'heure 
+//   document.addEventListener("DOMContentLoaded", () => {
+//   const posts = document.querySelectorAll("[data-post-id]");
+
+//   posts.forEach(post => {
+//     const postId = post.getAttribute("data-post-id");
+//     const input = post.querySelector("#commentinput");
+//     const submit = post.querySelector("#commentsubmit");
+//     const commentList = post.querySelector("#Listcomment");
+
+//     // Charger les commentaires depuis localStorage
+//     let comments = JSON.parse(localStorage.getItem(`comments_${postId}`)) || [];
+
+//     function formatTime(date) {
+//       return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+//     }
+
+//     function renderComments() {
+//       commentList.innerHTML = "";
+//       comments.forEach((comment, index) => {
+//         const li = document.createElement("li");
+//         li.className = "list-group-item d-flex justify-content-between align-items-start";
+
+//         li.innerHTML = `
+//           <div>
+//             <strong>${comment.author}</strong>
+//             <small class="text-muted ml-2">${comment.time}</small>
+//             <p class="mb-0">${comment.text}</p>
+//           </div>
+//           <button class="btn btn-sm btn-danger ml-2"><i class="bi bi-trash"></i></button>
+//         `;
+
+//         const deleteBtn = li.querySelector("button");
+//         deleteBtn.addEventListener("click", () => {
+//           // Animation + suppression
+//           li.classList.add("fade", "show");
+//           setTimeout(() => {
+//             comments.splice(index, 1);
+//             localStorage.setItem(`comments_${postId}`, JSON.stringify(comments));
+//             renderComments();
+//           }, 300);
+//         });
+
+//         commentList.appendChild(li);
+//       });
+//     }
+
+//     submit.addEventListener("click", () => {
+//       const text = input.value.trim();
+//       if (text !== "") {
+//         const comment = {
+//           text: text,
+//           author: "User", // Change ici si tu as un nom dynamique à afficher
+//           time: formatTime(new Date())
+//         };
+//         comments.push(comment);
+//         localStorage.setItem(`comments_${postId}`, JSON.stringify(comments));
+//         input.value = "";
+//         renderComments();
+//       }
+//     });
+
+//     renderComments();
+//   });
+// });
+
+
+  </script>
+</body>
+</html>
