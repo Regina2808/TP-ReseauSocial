@@ -40,7 +40,6 @@
 
    //récupération des champs avec leurs id  
   const togglecontentbtn = document.getElementById("togglecommentbtn");
-  const commentSection = document.getElementById("commentSection");
   const commentList = document.getElementById("commentList");
   const comment = document.getElementById("comment");
   const commentsubmit = document.getElementById("commentsubmit");
@@ -48,22 +47,11 @@
 
   //  pour faire coulisser le champs du commentaire en bas de la publication 
   
+  const commentSection = document.getElementById('commentSection');
+  const togglecommentBtn = document.getElementById('togglecommentbtn');
+  const collapseInstance = new bootstrap.Collapse(commentSection, { toggle: false });
 
-  togglecontentbtn.addEventListener("click", () => {
-    commentSection.classList.toggle("d-none");
-  });
-
-    commentsubmit.addEventListener("click", () => {
-    const comment ="";
-    
-    comment.value.trim();
-
-    if (comment === "") {
-      const li = document.createElement("li");
-      li.className = "list-group-item";
-      li.innerText = comment;
-      commentList.appendChild(li);
-      comment.value = "";
-    }
+  togglecommentBtn.addEventListener('click', () => {
+    collapseInstance.toggle();
   });
 

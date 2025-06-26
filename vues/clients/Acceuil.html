@@ -12,7 +12,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Publication LookLive</title>
+  <link rel="stylesheet" href="/assets/css/acceuil.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -71,9 +73,44 @@
           <li class="list-group-item"><i class="fas fa-ellipsis-h mr-2"></i> Voir plus</li>
         </ul>
       </aside>
+      
 
       <!-- main de l'utilisateur qui publie -->
       <main class="col-md-6">
+
+
+
+         <main class="col-md-4 b">
+              <!-- carrousel  -->
+        <div id="carousel" class="carousel slide shadow-sm rounded mb-4" data-bs-ride="carousel">
+            <div class="carousel-inner ">
+                <div class="carousel-item active ">
+                    <img src="/assets/image/logolooklive.png" class="d-block w-100 rounded shadow-sm " alt="Image 1">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5></h5>
+                      <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item ">
+                    <img src="/assets/image/logolooklive-L.png" class="d-block w-100 rounded shadow-sm " alt="Image 1">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5></h5>
+                      <p></p>
+                    </div>
+                </div>
+                 <!-- Contrôles gauche/droite -->
+                  <button class="carousel-control-prev carousel-control-sm" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+                  </button>
+
+                  <button class="carousel-control-next carousel-control-sm" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+                  </button>
+
+            </div>
+        </div>
+
+      </main>
         <div class="card shadow-sm">
           <div class="card-header bg-white">
             <h5 class="mb-0"><i class="fas fa-user mr-2"></i>nom User</h5>
@@ -87,39 +124,37 @@
             </p>
             <img src="" alt="" class="img-fluid rounded">
           </div>
-
         <!-- systeme de gestion de like et commentaire  -->
           <div class="btn-group" role="group">
-                
-                  <!-- bouton pour afficher les commentaires -->
-                <button id="togglecommentbtn" class="btn">
-                <i class="fas fa-chat-dots"></i> Commentaires
-                </button>
+              <!-- bouton  like/deslike et commentaires -->
+                 <div class="d-flex justify-content-start gap-2 mb-2">
+                       <button id="btnlike" type="button" class="btn btn-outline-primary">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                       </button>
+                      <button id="btndislike" type="button" class="btn btn-outline-primary">
+                          <i class="bi bi-hand-thumbs-down"></i>
+                      </button>
+                      <button id="togglecommentbtn" class="btn btn-secondary">
+                      <i class="bi bi-chat-dots"></i>
+                      </button>
+                 </div> 
                     <!-- partie commentaire cachée -->
-                <div id="commentSection" class="Collapse" >
+                <div id="commentSection" class="collapse" >
                     <!-- liste des commentaire cachée -->
                     <ul  id="Listcomment" class="list-group mb-3"></ul>
                     <!-- champ du commentaire  -->
                     <div class="input-group">
-                        <input type="comment" type="text" class="form-control" placeholder="Ajouter un commentaire...">
+                        <input type="comment"  class="form-control" placeholder="Ajouter un commentaire...">
                         <!-- button d'envoie du commentaire -->
                          <div class="input-group-append">
-                               <button id="commentsubmit" class="btn btn-primary" type="button"><i class="bi bi-send"></i></button>
+                               <button id="commentsubmit" class="btn btn-secondary" type="button"><i class="bi bi-send"></i></button>
                          </div>
                     </div>
                 </div>
-                <!-- button like/deslike -->
-                <button id="btnlike" type="button" class="btn btn-outline-primary">
-                    <i class="bi bi-hand-thumbs-up"></i> J’aime
-                </button>
-                <button id="btndislike" type="button" class="btn btn-outline-primary">
-                    <i class="bi bi-hand-thumbs-down"></i> Je n’aime pas
-                </button>
             </div>
-
         </div>
       </main>
-
+       
       <!-- Espace publicitaire pour article et autre  ou suggestions  d'article -->
 
       <aside class="col-md-3 d-none d-md-block">
@@ -133,6 +168,7 @@
       </aside>
     </div>
   </div>
+  
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
