@@ -1,0 +1,57 @@
+body{
+	background-color: #E9EFFF;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	align-items: center; 
+	min-height: 100vh;
+}
+
+.logo {
+	font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+	font-weight: 700; /* Bold */
+	font-size: 36px;
+	padding: 20px;
+	text-align: center;
+}
+
+.form-container {
+	width: 400px;
+	margin: 40px auto; /* Ajoute un espace en haut et en bas */
+	background: white;
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+  .form-container {
+    width: 95vw;
+    min-width: unset;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 12px;
+  }
+  .logo {
+    font-size: 26px;
+    padding: 10px 0;
+  }
+  .form-header {
+    margin-bottom: 18px;
+  }
+  .input-group {
+    flex-direction: row;
+    width: 100%;
+  }
+  .btn.w-100, .btn {
+    width: 100% !important;
+  }
+  .mb-3 {
+    margin-bottom: 12px !important;
+  }
+  .text-center.mt-3 {
+    margin-top: 16px !important;
+  }
+}
+

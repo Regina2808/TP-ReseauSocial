@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap 5 -->
+    <link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+   <link href="../../../assets/icons/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../assets/css/identify.css">
+    <link rel="icon" type="image/svg+xml" href="../../../assets/images/logo_L.svg">
+	<title>Mot de passe oublié</title>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-white shadow-sm mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="../auth/login.html">
+                <span class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+                    <img src="../../../assets/images/logo_L.svg" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;" />
+                </span>
+                <span class="fw-bold text-primary">LookLive</span>
+            </a>
+            <a href="../auth/login.html" class="btn btn-primary">Se connecter</a>
+        </div>
+    </nav>
+	<div class="container py-5">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-md-6 mb-4">
+				<h1><strong>Trouvez votre <span class="text-primary">compte</span></strong></h1>
+				<p>Veuillez entrer votre e-mail pour rechercher votre compte et accéder à votre espace personnel.</p>
+				<ul class="list-unstyled mt-4">
+					<li class="mb-2"><span class="text-success me-2"><i class="bi bi-check-circle-fill"></i></span>Sécurité avancée</li>
+					<li class="mb-2"><span class="text-success me-2"><i class="bi bi-check-circle-fill"></i></span>Performance optimale</li>
+					<li><span class="text-success me-2"><i class="bi bi-check-circle-fill"></i></span>Communauté active</li>
+				</ul>
+			</div>
+
+			<div class="col-md-5">
+				<div class="form-box">
+					<h4><strong>Retrouvez votre compte</strong></h4>
+					<p>Entrez votre e-mail</p>
+					<div class="input-group mb-3">
+						<span class="input-group-text"><i class="bi bi-envelope"></i></span>
+						<input type="text" class="form-control" placeholder="E-mail " id="email" autocomplete="email">
+						<div id="email-error" class="text-danger small"></div>
+					</div>
+					<div class="d-flex justify-content-between">
+						<button class="btn btn-outline-secondary" onclick="window.location.href='login.html'">Annuler</button>
+						<button class="btn btn-primary" id="search-btn" onclick="validerRecherche()">Rechercher</button>
+        			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../../../assets/js/identify.js"></script>
+</body>
+</html>
