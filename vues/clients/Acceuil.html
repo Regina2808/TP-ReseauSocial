@@ -311,28 +311,6 @@ Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explore
 });
 
 
-// inserssion de l'image 
-
-function addCarouselImage(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const carouselInner = document.querySelector("#carousel .carousel-inner");
-
-    const newItem = document.createElement("div");
-    newItem.className = "carousel-item";
-    newItem.innerHTML = `<img src="${e.target.result}" class="d-block w-100 rounded shadow-sm" alt="Image ajoutée">`;
-
-    // Insère juste avant le bouton "Ajouter"
-    const addButton = carouselInner.lastElementChild;
-    carouselInner.insertBefore(newItem, addButton);
-  };
-  reader.readAsDataURL(file);
-}
-
-
  </script>
 </body>
 </html>
