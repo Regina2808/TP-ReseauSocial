@@ -185,7 +185,7 @@ Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explore
                         <input id="commentinput" type="text"  class="form-control" placeholder="Ajouter un commentaire...">
                         <!-- button d'envoie du commentaire -->
                          <div class="input-group-append">
-                               <button id="commentsubmit" class="btn btn-secondary" type="button"><i class="bi bi-send"></i></button>
+                               <button class="commentsubmit" class="btn btn-secondary" type="button"><i class="bi bi-send"></i></button>
                          </div>
                     </div>
                 </div>
@@ -195,7 +195,7 @@ Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explore
        
       <!-- Espace publicitaire pour article et autre  ou suggestions  d'article -->
 
-      <aside class="col-md-3 d-none d-md-block icone" >
+      <aside class="col-md-3 d-none d-md-block" >
         <div class="card shadow-sm mb-3">
           <div class="card-body text-center">
             <p class="text-muted"><i class="fas fa-ad"></i> Publicité</p>
@@ -250,7 +250,7 @@ Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explore
 
    //récupération des champs avec leurs id  
   const togglecontentbtn = document.getElementById("togglecommentbtn");
-  const commentList = document.getElementById("commentList");
+  const commentList = document.getElementById("Listcomment");
   const comment = document.getElementById("comment");
   const commentsubmit = document.getElementById("commentsubmit");
 
@@ -264,6 +264,74 @@ Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explore
   togglecommentBtn.addEventListener('click', () => {
     collapseInstance.toggle();
   });
+
+  //sauvegarde dans le localstorage des commentaire 
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const posts = document.querySelectorAll("[data-post-id]");
+
+  posts.forEach(post => {
+    const postId = post.getAttribute("data-post-id");
+    const input = post.querySelector(".commentinput");
+    const submit = post.querySelector(".commentsubmit");
+    const list = post.querySelector(".Listcomment");
+
+    let comments = JSON.parse(localStorage.getItem(postId)) || [];
+
+    const render = () => {
+      list.innerHTML = "";
+      comments.forEach((cmt, index) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `
+          <span>${cmt}</span>
+          <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+        `;
+        li.querySelector("button").addEventListener("click", () => {
+          comments.splice(index, 1);
+          localStorage.setItem(postId, JSON.stringify(comments));
+          render();
+        });
+        list.appendChild(li);
+      });
+    };
+
+    submit.addEventListener("click", () => {
+      const value = input.value.trim();
+      if (value !== "") {
+        comments.push(value);
+        localStorage.setItem(postId, JSON.stringify(comments));
+        input.value = "";
+        render();
+      }
+    });
+
+    render();
+  });
+});
+
+
+// inserssion de l'image 
+
+function addCarouselImage(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const carouselInner = document.querySelector("#carousel .carousel-inner");
+
+    const newItem = document.createElement("div");
+    newItem.className = "carousel-item";
+    newItem.innerHTML = `<img src="${e.target.result}" class="d-block w-100 rounded shadow-sm" alt="Image ajoutée">`;
+
+    // Insère juste avant le bouton "Ajouter"
+    const addButton = carouselInner.lastElementChild;
+    carouselInner.insertBefore(newItem, addButton);
+  };
+  reader.readAsDataURL(file);
+}
+
 
  </script>
 </body>
