@@ -42,7 +42,78 @@
   </div>
 </div>
 
+<div class="carousel-item d-flex justify-content-center align-items-center" style="background-color: #f8f9fa;">
+  <button class="btn btn-outline-secondary rounded-circle" style="width: 60px; height: 60px;" onclick="document.getElementById('carouselInput').click();">
+    <i class="bi bi-plus" style="font-size: 1.5rem;"></i>
+  </button>
+  <input type="file" accept="image/*" id="carouselInput" class="d-none" onchange="addCarouselImage(event)">
+</div>
 
+
+
+<br>
+<div class="carousel-item d-flex justify-content-center align-items-center bg-light">
+  <button onclick="document.getElementById('carouselInput').click();"
+          class="btn p-0 border-0 shadow-none"
+          style="background: transparent; width: 40px; height: 40px;">
+    <i class="bi bi-plus-circle" style="font-size: 1.8rem; color: #007bff;"></i>
+  </button>
+  <input type="file" accept="image/*" id="carouselInput" class="d-none" onchange="addCarouselImage(event)">
+</div>
+
+
+
+
+
+ <div class="card shadow-sm">
+          <div class="card-header bg-white">
+            <h5 class="mb-0"><i class="fas fa-user mr-2"></i>NELLA dec</h5>
+          </div>
+          <div class="card-body p-0">
+            <h6 class="card-subtitle mb-2 text-muted"></h6>
+            <p class="card-text">
+              <!-- contenu de la publication -->
+                
+              <em>✨Un Printemps à Sakura Gakuen
+
+C’est la fin de l’après-midi au lycée Sakura. La lumière dorée traverse les fenêtres de la classe 2-B pendant que les élèves rangent doucement leurs affaires. Les rires fusent dans le couloir, les fenêtres vibrent légèrement sous les cris d’un match de basket dans la cour. Sur un banc sous les cerisiers, Haruki attend timidement que Mika sorte du club de dessin. Il tient dans ses mains un petit carnet — ses pensées du jour, où chaque page est dédiée à l’émotion qu’elle lui inspire.
+
+Autour d’eux, la vie s’écoule lentement, comme une chanson discrète. C’est un de ces jours simples où rien ne change... et pourtant tout commence.</p>
+               <div class="embed-responsive embed-responsive-1by1" style="max-width: 100px; margin: auto;">
+                <img src="/assets/image/mangas1.png" class="embed-responsive-item img-fluid rounded" alt="Publication">
+              </div>
+          </div>
+        <!-- systeme de gestion de like et commentaire  -->
+          <div class="btn-group" role="group">
+              <!-- bouton  like/deslike et commentaires -->
+                 <div class="d-flex justify-content-start gap-2 mb-2">
+                       <button id="btnlike" type="button" class="btn btn-outline-primary">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                       </button>
+                      <button id="btndislike" type="button" class="btn btn-outline-primary">
+                          <i class="bi bi-hand-thumbs-down"></i>
+                      </button>
+                      <button id="togglebtn" class="btn btn-secondary">
+                      <i class="bi bi-chat-dots"></i>
+                      </button>
+                 </div> 
+                    <!-- partie commentaire cachée -->
+                <div id="commentSection" class="collapse" data-post-id="post1">
+                    <!-- liste des commentaire cachée -->
+                     <div class="card-body">
+                         <ul  id="Listcomment" class="list-group mb-3"></ul>
+                     </div>
+                    <!-- champ du commentaire  -->
+                    <div class="input-group">
+                        <input id="commentinput" type="text"  class="form-control" placeholder="Ajouter un commentaire...">
+                        <!-- button d'envoie du commentaire -->
+                         <div class="input-group-append">
+                               <button id="commentsubmit" class="btn btn-secondary" type="button"><i class="bi bi-send"></i></button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
   <script>
 
 
@@ -88,6 +159,31 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   });
 });
+
+
+// inserssion de l'image 
+
+function addCarouselImage(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const carouselInner = document.querySelector("#carousel .carousel-inner");
+
+    const newItem = document.createElement("div");
+    newItem.className = "carousel-item";
+    newItem.innerHTML = `<img src="${e.target.result}" class="d-block w-100 rounded shadow-sm" alt="Image ajoutée">`;
+
+    // Insère juste avant le bouton "Ajouter"
+    const addButton = carouselInner.lastElementChild;
+    carouselInner.insertBefore(newItem, addButton);
+  };
+  reader.readAsDataURL(file);
+}
+
+
+
 
 
 
