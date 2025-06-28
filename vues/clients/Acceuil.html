@@ -7,6 +7,14 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<!-- Leaflet JS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Geocoder CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
   
 
   <style>
@@ -100,6 +108,61 @@
 
   .friends-list .card-title i {
     font-size: 1.1rem;
+  }
+
+    .like-btn, .dislike-btn, .toggle-comments {
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .comment-section .form-control {
+    background-color: #f0f2f5;
+    border: none;
+    padding-left: 15px;
+    font-size: 0.9rem;
+  }
+
+  .comment-section .form-control:focus {
+    background-color: #fff;
+    border: 1px solid #007bff;
+    box-shadow: none;
+  }
+
+  .comment-list li {
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    max-width: 90%;
+  }
+
+  .comment-list li span {
+    font-weight: 500;
+    margin-right: 5px;
+  }
+   
+  .form-control {
+    background-color: #f0f2f5;
+    border: none;
+  }
+
+  .form-control:focus {
+    background-color: #fff;
+    border: 1px solid #007bff;
+    box-shadow: none;
+  }
+
+  .like-btn, .dislike-btn, .toggle-comments {
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .comment-list li {
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    max-width: 90%;
   }
 
   </style>
@@ -222,92 +285,49 @@
         </div>
 
            <!--  Formulaire de publication -->
-        <div class="card shadow-sm mb-4 publication-form">
-          <div class="card-body">
-            <div class="d-flex align-items-center mb-3">
-              <img src="/assets/image/user1.jpg" class="rounded-circle mr-2" width="40" height="40" alt="user">
-              <input type="text" class="form-control rounded-pill" placeholder="Quoi de neuf,.......?">
-            </div>
+                <div class="card shadow-sm mb-4 publication-form">
+                  <div class="card-body">
+                   <div class="d-flex align-items-center mb-3">
+                    <img src="/assets/image/logolooklive1.png" class="rounded-circle mr-2" width="45" height="45" alt="user">
+                    <input type="text" class="form-control rounded-pill" id="postInput" placeholder="Exprimez-vous...">
+                  </div>
+                  <div class="text-right">
+                    <button class="btn btn-primary btn-sm" id="publishBtn">
+                      <i class="bi bi-send-fill"></i> Publier
+                    </button>
+                 </div>
 
             <hr>
 
             <div class="d-flex justify-content-between flex-wrap text-center">
               <label class="btn btn-light flex-fill m-1 d-flex align-items-center justify-content-center icon-option">
                 <i class="bi bi-image-fill text-primary mr-2"></i> Photo
-                <input type="file" accept="image/*" hidden>
+                <input type="file" accept="image/*" id="postImage" hidden>
               </label>
+              <input type="hidden" id="postLocation">
 
               <label class="btn btn-light flex-fill m-1 d-flex align-items-center justify-content-center icon-option">
                 <i class="bi bi-camera-reels-fill text-primary mr-2"></i> Vidéo
-                <input type="file" accept="video/*" hidden>
+                <input type="file" accept="video/*" id="postVideo" hidden>
               </label>
 
             <div class="dropdown flex-fill m-1">
               <button class="btn btn-light btn-block d-flex align-items-center justify-content-center icon-option dropdown-toggle" type="button" id="dropdownHumeur" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="bi bi-emoji-smile-fill text-primary mr-2"></i> Humeur
+              </button id="postMood">
+              <input type="hidden" id="postMood">
+            </div>
+
+              <button type="button" class="btn btn-light flex-fill m-1 d-flex align-items-center justify-content-center icon-option" data-toggle="modal" data-target="#mapModal">
+                <i class="bi bi-geo-alt-fill text-primary mr-2" id="postLocation"></i> Lieu
               </button>
-            </div>
-
-              <button type="button" class="btn btn-light flex-fill m-1 d-flex align-items-center justify-content-center icon-option">
-                <i class="bi bi-geo-alt-fill text-primary mr-2"></i> Lieu
-              </button>
+              <input type="hidden" id="postLocation">
             </div>
           </div>
-        </div>
-
-
-
-        <div class="card shadow-sm" >
-          <div class="card-header bg-white">
-            <h5 class="mb-0"><i class="fas fa-user mr-2"></i>NELL dav</h5>
-          </div>
-          <div class="card-body p-0">
-            <h6 class="card-subtitle mb-2 text-muted"></h6>
-            <p class="card-text">
-              <!-- contenu de la publication -->
-                publication .............
-              <em>✨ Plongez dans l’univers fascinant du manga ✨
-
-Entre récits épiques, dessins percutants et émotions intenses, le manga est bien plus qu’un simple divertissement. C’est une forme d’art à part entière, qui mélange traditions japonaises et imaginaires sans frontières. Chaque case raconte une histoire, chaque coup de crayon transmet une énergie unique. 💥📖
-
-Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explorer les mystères de Tokyo avec Kaneki, les mangas ont ce pouvoir magique de créer des mondes où chacun peut se reconnaître. 🔥🌸</em>
-            </p>
-             <div class="embed-responsive embed-responsive-1by1 mb-2" style="max-width: 100px; margin: auto;">
-                <img src="/assets/image/mangas.png" class="embed-responsive-item img-fluid rounded" alt="Publication">
-              </div>
-          </div>
-        <!-- systeme de gestion de like et commentaire  -->
-          <div class="btn-group" role="group">
-              <!-- bouton  like/deslike et commentaires -->
-                 <div class="d-flex justify-content-start gap-2 mb-2">
-                       <button id="btnlike" type="button" class="btn btn-outline-primary">
-                        <i class="bi bi-hand-thumbs-up"></i>
-                       </button>
-                      <button id="btndislike" type="button" class="btn btn-outline-primary">
-                          <i class="bi bi-hand-thumbs-down"></i>
-                      </button>
-                      <button id="togglebtn" class="btn btn-secondary">
-                      <i class="bi bi-chat-dots"></i>
-                      </button>
-                 </div> 
-                    <!-- partie commentaire cachée -->
-                <div id="commentSection" class="collapse" data-post-id="post1">
-                    <!-- liste des commentaire cachée -->
-                     <div class="card-body">
-                         <ul  class="list-group mb-3  Listcomment "></ul>
-                     </div>
-                    <!-- champ du commentaire  -->
-                    <div class="input-group">
-                        <input id="commentinput" type="text"  class="form-control" placeholder="Ajouter un commentaire...">
-                        <!-- button d'envoie du commentaire -->
-                         <div class="input-group-append">
-                               <button class="commentsubmit btn btn-secondary" type="button"><i class="bi bi-send"></i></button>
-                         </div>
-                    </div>
-                </div>
-            </div>
         </div> 
-      </main>
+      <!-- espace de publication  -->
+        <div id="postContainer"></div>   
+</main>
        
       <!-- Espace publicitaire pour article et autre  ou suggestions  d'article -->
       
@@ -320,14 +340,14 @@ Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explore
             </h6>
             <ul class="list-unstyled mb-0">
               <li class="media align-items-center mb-3">
-                <img src="/assets/image/user1.jpg" class="rounded-circle mr-3 border" width="45" height="45" alt="Ami 1">
+                <img src="/assets/image/mangas1.png" class="rounded-circle mr-3 border" width="45" height="45" alt="Ami 1">
                 <div class="media-body">
                   <h6 class="mb-0">Alice</h6>
                   <small class="text-success">● En ligne</small>
                 </div>
               </li>
               <li class="media align-items-center mb-3">
-                <img src="/assets/image/user2.jpg" class="rounded-circle mr-3 border" width="45" height="45" alt="Ami 2">
+                <img src="/assets/image/mangas.png" class="rounded-circle mr-3 border" width="45" height="45" alt="Ami 2">
                 <div class="media-body">
                   <h6 class="mb-0">Bruno</h6>
                   <small class="text-muted">● Hors ligne</small>
@@ -348,112 +368,197 @@ Que ce soit pour vibrer avec Luffy, frissonner aux côtés de Tanjiro ou explore
       </aside>
     </div>
   </div>
+
+  <!-- Modal pour la carte -->
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mapModalLabel">Choisir un lieu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="map" style="height: 400px;"></div>
+      </div>
+      <div class="modal-footer">
+        <input type="text" id="selectedLocation" class="form-control" placeholder="Lieu sélectionné" readonly>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
  <script>
-    // récupération des id
+    
+ 
+ const postInput = document.getElementById('postInput');
+const publishBtn = document.getElementById('publishBtn');
+const postContainer = document.getElementById('postContainer');
+const postImage = document.getElementById('postImage');
+const postVideo = document.getElementById('postVideo');
+const postLocation = document.getElementById('postLocation');
+const postMood = document.getElementById('postMood');
 
-  const btnlike = document.getElementById('btnlike');
-  const btndislike = document.getElementById('btndislike');
+publishBtn.addEventListener('click', () => {
+  const content = postInput.value.trim();
+  const location = postLocation.value.trim();
+  const mood = postMood.value.trim();
+  const imageFile = postImage.files[0];
+  const videoFile = postVideo.files[0];
 
-  // récupération de la réaction enregistrée
-  const saved = localStorage.getItem('reaction');
-  if (saved === 'like') activerLike();
-  if (saved === 'dislike') activerDislike();
+  if (!content && !imageFile && !videoFile) return;
 
-  btnlike.onclick = () => {
-    localStorage.setItem('reaction', 'like');
-    activerLike();
-  };
+  const post = document.createElement('div');
+  post.className = 'card shadow-sm mb-4';
 
-  btndislike.onclick = () => {
-    localStorage.setItem('reaction', 'dislike');
-    activerDislike();
-  };
+  const renderPost = (imageURL = '', videoURL = '') => {
+    post.innerHTML = `
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-2">
+          <img src="/assets/image/logolooklive1.png" class="rounded-circle mr-2" width="40" height="40" alt="user">
+          <div>
+            <h6 class="mb-0">Gildas</h6>
+            <small class="text-muted">${new Date().toLocaleString()}</small>
+          </div>
+        </div>
+        ${content ? `<p>${content}</p>` : ""}
+        ${mood ? `<p><i class="bi bi-emoji-smile text-warning"></i> Humeur : ${mood}</p>` : ""}
+        ${imageURL ? `<img src="${imageURL}" class="img-fluid rounded mb-2" alt="publication">` : ""}
+        ${videoURL ? `<video controls class="w-100 rounded mb-2"><source src="${videoURL}" type="video/mp4"></video>` : ""}
+        ${location ? `<p class="text-muted"><i class="bi bi-geo-alt-fill text-primary"></i> ${location}</p>` : ""}
 
-    //   foncton  d'activation de like 
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <button class="btn btn-light btn-sm like-btn"><i class="bi bi-hand-thumbs-up"></i> <span class="like-count">0</span></button>
+            <button class="btn btn-light btn-sm dislike-btn"><i class="bi bi-hand-thumbs-down"></i> <span class="dislike-count">0</span></button>
+          </div>
+          <button class="btn btn-light btn-sm toggle-comments"><i class="bi bi-chat-dots"></i> Commenter</button>
+        </div>
 
-  function activerLike() {
-    btnlike.classList.replace('btn-outline-primary', 'btn-primary');
-    btndislike.classList.replace('btn-primary', 'btn-outline-primary');
-    btnlike.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i> J’aime';
-    btndislike.innerHTML = '<i class="bi bi-hand-thumbs-down"></i> Je n’aime pas';
-  }
+        <div class="comment-section d-none">
+          <ul class="list-unstyled comment-list mb-3"></ul>
+          <div class="d-flex align-items-center">
+            <img src="/assets/image/user1.jpg" class="rounded-circle mr-2" width="40" height="40" alt="user">
+            <input type="text" class="form-control rounded-pill mr-2 comment-input" placeholder="Ajouter un commentaire...">
+            <button class="btn btn-primary rounded-circle send-comment"><i class="bi bi-send-fill text-white"></i></button>
+          </div>
+        </div>
+      </div>
+    `;
 
-     //   fonction  d'activation de dislike 
+    postContainer.prepend(post);
+    postInput.value = '';
+    postLocation.value = '';
+    postMood.value = '';
+    postImage.value = '';
+    postVideo.value = '';
 
-  function activerDislike() {
-    btndislike.classList.replace('btn-outline-primary', 'btn-primary');
-    btnlike.classList.replace('btn-primary', 'btn-outline-primary');
-    btndislike.innerHTML = '<i class="bi bi-hand-thumbs-down-fill"></i> Je n’aime pas';
-    btnlike.innerHTML = '<i class="bi bi-hand-thumbs-up"></i> J’aime';
-  }
+    // Interactions
+    const likeBtn = post.querySelector('.like-btn');
+    const dislikeBtn = post.querySelector('.dislike-btn');
+    const likeCount = post.querySelector('.like-count');
+    const dislikeCount = post.querySelector('.dislike-count');
+    const toggleBtn = post.querySelector('.toggle-comments');
+    const commentSection = post.querySelector('.comment-section');
+    const commentInput = post.querySelector('.comment-input');
+    const sendBtn = post.querySelector('.send-comment');
+    const commentList = post.querySelector('.comment-list');
 
+    let likes = 0;
+    let dislikes = 0;
 
-   //récupération des champs avec leurs id  
-  const togglecontentbtn = document.getElementById("togglecommentbtn");
-  const commentList = document.getElementById("Listcomment");
-  const comment = document.getElementById("comment");
-  const commentsubmit = document.getElementById("commentsubmit");
+    likeBtn.addEventListener('click', () => {
+      likes++;
+      likeCount.textContent = likes;
+    });
 
+    dislikeBtn.addEventListener('click', () => {
+      dislikes++;
+      dislikeCount.textContent = dislikes;
+    });
 
-  //  pour faire coulisser le champs du commentaire en bas de la publication 
-  
-  const commentSection = document.getElementById('commentSection');
-  const togglecommentBtn = document.getElementById('togglebtn');
-  const collapseInstance = new bootstrap.Collapse(commentSection, { toggle: false });
+    toggleBtn.addEventListener('click', () => {
+      commentSection.classList.toggle('d-none');
+    });
 
-  togglecommentBtn.addEventListener('click', () => {
-    collapseInstance.toggle();
-  });
-
-  //sauvegarde dans le localstorage des commentaire 
-
-  document.addEventListener("DOMContentLoaded", () => {
-  const posts = document.querySelectorAll("[data-post-id]");
-
-  posts.forEach(post => {
-    const postId = post.getAttribute("data-post-id");
-    const commentinput = post.querySelector(".commentinput");
-    const commentsubmit = post.querySelector(".commentsubmit");
-    const list = post.querySelector(".Listcomment");
-
-    let comments = JSON.parse(localStorage.getItem(postId)) || [];
-
-    const render = () => {
-      list.innerHTML = "";
-      comments.forEach((cmt, index) => {
-        const li = document.createElement("li");
-        li.className = "list-group-item d-flex justify-content-between align-items-center";
-        li.innerHTML = `
-          <span>${cmt}</span>
-          <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-        `;
-        li.querySelector("button").addEventListener("click", () => {
-          comments.splice(index, 1);
-          localStorage.setItem(postId, JSON.stringify(comments));
-          render();
-        });
-        list.appendChild(li);
-      });
-    };
-  
-   
-    commentsubmit.addEventListener("click", () => {
-       const value = commentinput.value.trim();
-      if (value !== "") {
-        comments.push(value);
-        localStorage.setItem(postId, JSON.stringify(comments));
-        commentinput.value = "";
-        render();
+    sendBtn.addEventListener('click', () => {
+      const text = commentInput.value.trim();
+      if (text !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>Gildas</strong> ${text}`;
+        commentList.appendChild(li);
+        commentInput.value = '';
       }
     });
 
-    render();
-  });
+    commentInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        sendBtn.click();
+        e.preventDefault();
+      }
+    });
+  };
+
+  if (imageFile) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      if (videoFile) {
+        const videoReader = new FileReader();
+        videoReader.onload = v => renderPost(e.target.result, v.target.result);
+        videoReader.readAsDataURL(videoFile);
+      } else {
+        renderPost(e.target.result, '');
+      }
+    };
+    reader.readAsDataURL(imageFile);
+  } else if (videoFile) {
+    const videoReader = new FileReader();
+    videoReader.onload = v => renderPost('', v.target.result);
+    videoReader.readAsDataURL(videoFile);
+  } else {
+    renderPost();
+  }
 });
 
+
+  let map;
+  let marker;
+
+  $('#mapModal').on('shown.bs.modal', function () {
+    if (!map) {
+      map = L.map('map').setView([6.497, 2.603], 13); // Position initiale : Cotonou
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Ajout du champ de recherche
+      L.Control.geocoder({
+        defaultMarkGeocode: false
+      })
+      .on('markgeocode', function(e) {
+        const center = e.geocode.center;
+        map.setView(center, 15);
+        if (marker) map.removeLayer(marker);
+        marker = L.marker(center).addTo(map);
+        document.getElementById('selectedLocation').value = e.geocode.name;
+      })
+      .addTo(map);
+
+      // Clic sur la carte
+      map.on('click', function(e) {
+        if (marker) map.removeLayer(marker);
+        marker = L.marker(e.latlng).addTo(map);
+        document.getElementById('selectedLocation').value = `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+      });
+    }
+    setTimeout(() => map.invalidateSize(), 200); // Corrige l'affichage
+  });
 
  </script>
 </body>
