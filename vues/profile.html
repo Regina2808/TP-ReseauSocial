@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - Réseau Social</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/profile.css">
+    
+</head>
+<script>
+// Gestion spécifique des onglets pour la page profil
+document.addEventListener('DOMContentLoaded', function() {
+    // Activer l'onglet Publications si nécessaire
+    if (window.location.hash === '#posts' || localStorage.getItem('activeTab') === '#posts') {
+        const tabTrigger = document.querySelector('a[href="#posts"]');
+        if (tabTrigger) {
+            const tab = new bootstrap.Tab(tabTrigger);
+            tab.show();
+            
+            // Faire défiler vers la section
+            document.querySelector('#posts').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        localStorage.removeItem('activeTab');
+    }
+});
+</script>
+<body>
+    <div class="container py-4">
+        <!-- En-tête du profil -->
+        <div class="profile-header">
+            <div class="cover-photo" id="coverPhoto" style="background-image: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                <button class="btn btn-light position-absolute top-2 end-2" onclick="showCoverPhotoModal()">
+                    <i class="fas fa-camera me-1"></i> Modifier
+                </button>
+            </div>
+            
+            <div class="px-4">
+                <div class="profile-pic-container d-flex justify-content-between align-items-end">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Photo de profil" class="profile-pic" id="profilePic" onclick="changeProfilePicture()">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary me-2">
+                            <i class="fas fa-plus me-1"></i> Ajouter à la story
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-pen me-1"></i> Modifier le profil
+                        </button>
+                    </div>
+                </div>
+                
+                <h1 class="profile-name" id="profileName">Laura Adh</h1>
+                <div class="friends-count">1,7 K ami(e)s</div>
+                
+                <!-- Onglets de navigation -->
+                <ul class="nav nav-tabs mt-3" id="profileTabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#posts">Publications</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showAboutModal()">À propos</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#friends">Ami(e)s</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#photos">Photos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#more">Plus <i class="fas fa-caret-down"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Contenu principal -->
+        <div class="row">
+            <!-- Colonne de gauche -->
+            <div class="col-lg-4">
+                <!-- Section Intro -->
+                <div class="content-section">
+                    <h2 class="section-title">Intro</h2>
+                        <div class="info-item">
+                            <i class="fas fa-pencil-alt me-2"></i>
+                            <span id="bioInfo">Modifier bio</span>
+                            <button class="edit-btn ms-auto" onclick="toggleEditForm('bioForm')">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+                        <form class="form-edit" id="bioForm">
+                            <div class="mb-3">
+                                <textarea class="form-control" id="bioInput" rows="3">Weiss</textarea>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="saveInfo('bioInfo', 'bioInput', 'bioForm')">Enregistrer</button>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="toggleEditForm('bioForm')">Annuler</button>
+                        </form>
+                    <div class="info-item">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span id="jobInfo">Employé, à son compte</span>
+                        <button class="edit-btn ms-auto" onclick="toggleEditForm('jobForm')">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </div>
+                    <form class="form-edit" id="jobForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="jobInput" value="Employé, à son compte">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="saveInfo('jobInfo', 'jobInput', 'jobForm')">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleEditForm('jobForm')">Annuler</button>
+                    </form>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        <span id="educationInfo">A étudié à Collège Catholique St Michel de Cotonou</span>
+                        <button class="edit-btn ms-auto" onclick="toggleEditForm('educationForm')">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </div>
+                    <form class="form-edit" id="educationForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="educationInput" value="A étudié à Collège Catholique St Michel de Cotonou">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="saveInfo('educationInfo', 'educationInput', 'educationForm')">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleEditForm('educationForm')">Annuler</button>
+                    </form>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-home me-2"></i>
+                        <span id="cityInfo">Habite à Cotonou</span>
+                        <button class="edit-btn ms-auto" onclick="toggleEditForm('cityForm')">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </div>
+                    <form class="form-edit" id="cityForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="cityInput" value="Habite à Cotonou">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="saveInfo('cityInfo', 'cityInput', 'cityForm')">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleEditForm('cityForm')">Annuler</button>
+                    </form>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-heart me-2"></i>
+                        <span id="statusInfo">Célibataire</span>
+                        <button class="edit-btn ms-auto" onclick="toggleEditForm('statusForm')">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </div>
+                    <form class="form-edit" id="statusForm">
+                        <div class="mb-3">
+                            <select class="form-select" id="statusInput">
+                                <option value="Célibataire">Célibataire</option>
+                                <option value="En couple">En couple</option>
+                                <option value="Marié(e)">Marié(e)</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="saveInfo('statusInfo', 'statusInput', 'statusForm')">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleEditForm('statusForm')">Annuler</button>
+                    </form>
+
+                    <div class="info-item">
+                        <i class="fas fa-birthday-cake me-2"></i>
+                        <span id="birthdayInfo">Né(e) le 15 janvier 1990</span>
+                        <button class="edit-btn ms-auto" onclick="toggleEditForm('birthdayForm')">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </div>
+                    <form class="form-edit" id="birthdayForm">
+                        <div class="mb-3">
+                            <input type="date" class="form-control" id="birthdayInput" value="1990-01-15">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="saveInfo('birthdayInfo', 'birthdayInput', 'birthdayForm')">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleEditForm('birthdayForm')">Annuler</button>
+                    </form>
+                        <div class="info-item">
+                            <i class="fas fa-star me-2"></i>
+                            <span id="featuredContent">Contenu à la une</span>
+                            <button class="edit-btn ms-auto" onclick="toggleEditForm('featuredForm')">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+                        <form class="form-edit" id="featuredForm">
+                            <div class="mb-3">
+                                <select class="form-select" id="featuredInput">
+                                    <option value="">-- Sélectionner un contenu --</option>
+                                    <option value="post1">Publication: "La femme de ta vie"</option>
+                                    <option value="photo1">Photo: Vacances à la plage</option>
+                                    <option value="video1">Vidéo: Mon voyage</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="saveInfo('featuredContent', 'featuredInput', 'featuredForm')">Enregistrer</button>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="toggleEditForm('featuredForm')">Annuler</button>
+                        </form>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-user-friends me-2"></i>
+                        <span>Suivi(s) par 11 305 personnes</span>
+                    </div>
+                </div>
+                
+                <!-- Section Photos -->
+                <div class="content-section">
+                    <h2 class="section-title">Photos</h2>
+                    <div class="photo-grid" id="photoGrid">
+                        <!-- Les photos seront ajoutées dynamiquement ici -->
+                    </div>
+                    <button class="btn btn-link p-0 mt-2" onclick="showAllPhotos()">Voir toutes les photos</button>
+                </div>
+            </div>
+            
+            <!-- Colonne de droite (Publications) -->
+            <div class="col-lg-8">
+                <!-- Créer une publication -->
+                <div class="content-section mb-4" id="createPostSection">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Photo de profil" class="rounded-circle me-2" width="40" height="40">
+                        <input type="text" class="form-control rounded-pill" id="postInput" placeholder="Quoi de neuf, Laura ?" onclick="showPostOptions()">
+                    </div>
+                    <div class="d-flex justify-content-between border-top pt-3" id="postOptions" style="display: none;">
+                        <button class="btn btn-light" onclick="addMedia('video')">
+                            <i class="fas fa-video text-danger me-1"></i> Vidéo en direct
+                        </button>
+                        <button class="btn btn-light" onclick="addMedia('photo')">
+                            <i class="fas fa-images text-success me-1"></i> Photo/Video
+                        </button>
+                        <button class="btn btn-light" onclick="addMedia('mood')">
+                            <i class="fas fa-smile text-warning me-1"></i> Humeur
+                        </button>
+                    </div>
+                    <div id="postMediaPreview" class="mt-3" style="display: none;"></div>
+                    <div class="d-flex justify-content-end mt-3" id="postButtonContainer" style="display: none;">
+                        <button class="btn btn-primary" onclick="createPost()">Publier</button>
+                    </div>
+                </div>
+                
+                <!-- Conteneur des publications -->
+                <div id="postsContainer">
+                    <!-- Les publications seront ajoutées dynamiquement ici -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bouton flottant -->
+    <div class="floating-btn" data-bs-toggle="tooltip" title="Créer une publication" onclick="showPostModal()">
+        <i class="fas fa-pen"></i>
+    </div>
+    
+    <!-- Modal pour changer la photo de profil -->
+    <div class="modal fade" id="profilePicModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Changer la photo de profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Choisir parmi nos photos par défaut :</h6>
+                    <div class="photo-selection" id="profilePicSelection">
+                        <!-- Les options seront ajoutées dynamiquement -->
+                    </div>
+                    <hr>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary" onclick="document.getElementById('profilePicUpload').click()">
+                            <i class="fas fa-upload me-2"></i> Télécharger une photo
+                        </button>
+                        <input type="file" id="profilePicUpload" accept="image/*" style="display: none;" onchange="uploadProfilePicture(this)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal pour changer la photo de couverture -->
+    <div class="modal fade" id="coverPhotoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Changer la photo de couverture</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Choisir parmi nos photos par défaut :</h6>
+                    <div class="photo-selection" id="coverPhotoSelection">
+                        <!-- Les options seront ajoutées dynamiquement -->
+                    </div>
+                    <hr>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary" onclick="document.getElementById('coverPhotoUpload').click()">
+                            <i class="fas fa-upload me-2"></i> Télécharger une photo
+                        </button>
+                        <input type="file" id="coverPhotoUpload" accept="image/*" style="display: none;" onchange="uploadCoverPhoto(this)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal pour créer une publication -->
+    <div class="modal fade" id="createPostModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Créer une publication</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Photo de profil" class="rounded-circle me-2" width="40" height="40">
+                        <div>
+                            <h6 class="mb-0 fw-bold" id="modalProfileName">Laura Adh</h6>
+                            <select class="form-select form-select-sm mt-1" style="width: auto; display: inline-block;">
+                                <option><i class="fas fa-globe-americas"></i> Public</option>
+                                <option>Amis</option>
+                                <option>Moi uniquement</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <textarea class="form-control border-0 mb-3" rows="5" placeholder="Quoi de neuf, Laura ?" style="font-size: 1.5rem; resize: none;"></textarea>
+                    
+                    <div class="border rounded-3 p-3 mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Ajouter à votre publication</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-light rounded-pill">
+                                <i class="fas fa-images text-success me-1"></i> Photo/Video
+                            </button>
+                            <button class="btn btn-light rounded-pill">
+                                <i class="fas fa-user-tag text-primary me-1"></i> Personne
+                            </button>
+                            <button class="btn btn-light rounded-pill">
+                                <i class="fas fa-smile text-warning me-1"></i> Humeur
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary w-100" disabled>Publier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galerie photo modale -->
+    <div id="galleryModal" class="modal-gallery">
+        <span class="close-gallery" onclick="closeGallery()">&times;</span>
+        <img class="modal-gallery-content" id="galleryImage">
+        <div id="galleryCaption"></div>
+    </div>
+
+    <!-- Toutes les photos -->
+    <div id="allPhotosModal" class="modal-gallery" style="padding-top: 50px;">
+        <span class="close-gallery" onclick="closeAllPhotos()">&times;</span>
+        <h3 style="color: white; text-align: center; margin-bottom: 20px;">Toutes mes photos</h3>
+        <div class="gallery-container" id="allPhotosContainer">
+            <!-- Les photos seront ajoutées dynamiquement ici -->
+        </div>
+    </div>
+        <!-- Modal À propos -->
+        <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">À propos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body" id="aboutModalContent">
+                <!-- Le contenu de about.html sera chargé ici -->
+                <div class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Chargement...</span>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    <!-- Bootstrap JS et dépendances -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

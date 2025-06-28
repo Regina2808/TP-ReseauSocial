@@ -1,0 +1,20 @@
+/* Variables et styles globaux */
+:root {
+    --fb-blue: #1877f2;
+    --fb-gray: #f0f2f5;
+    --fb-card: white;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--fb-gray);
+    margin: 0;
+    padding: 0;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
