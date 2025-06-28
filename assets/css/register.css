@@ -1,0 +1,144 @@
+body{
+	background-color: #E9EFFF;
+	min-height: 100vh;
+}
+
+.logo {
+	font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+	font-weight: 700; /* Bold */
+	font-size: 36px;
+	padding: 20px;
+	text-align: center;
+}
+
+.form-container {
+	width: 400px;
+	margin: 40px auto; /* Ajoute un espace en haut et en bas */
+	background: white;
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.form-header h4 {
+	font-weight: bold;
+}
+
+.btn-continue {
+	background-color: #1877F2;
+	color: white;
+}
+
+/* Barre d'étapes d'inscription */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.stepper-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+.stepper-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  border: 2px solid #ccc;
+  background: #f4f6fa;
+  color: #adb5bd;
+  margin-bottom: 0.2rem;
+  transition: all 0.2s;
+}
+.stepper-step.active .stepper-circle {
+  background: #E9EFFF;
+  border-color: #1877F2;
+  color: #1877F2;
+}
+.stepper-step.active .stepper-label {
+  
+  font-weight: 500;
+}
+.stepper-label {
+  font-size: 0.95rem;
+  color: #adb5bd;
+  margin-top: 0.2rem;
+}
+.stepper-line {
+  flex: 1;
+  height: 2px;
+  background: #ccc;
+  margin: 0 8px;
+}
+
+/* Avatar d'intro pour le formulaire */
+.intro-avatar-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #e9f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+  .form-container {
+    width: 95vw;
+    min-width: unset;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 12px;
+  }
+  .logo {
+    font-size: 26px;
+    padding: 10px 0;
+  }
+  .form-header {
+    margin-bottom: 18px;
+  }
+  .stepper-step {
+    min-width: 40px;
+  }
+  .stepper-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .intro-avatar-circle {
+    width: 40px;
+    height: 40px;
+  }
+  .row.mb-3 > .col {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .row.mb-3 {
+    flex-direction: column;
+    display: flex;
+  }
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn.w-45, .btn.w-100 {
+    width: 100% !important;
+  }
+  .recap-box {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+}

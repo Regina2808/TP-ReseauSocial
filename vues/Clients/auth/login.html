@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap 5 -->
+    <link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+   <link href="../../../assets/icons/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../assets/css/login.css">
+    <link rel="icon" type="image/svg+xml" href="../../../assets/images/logo_L.svg">
+	<title>Se connecter à LookLive</title>
+</head>
+<body>
+	<div class="logo text-primary"> LookLive </div>
+	<div class="text-center">
+		<p class="text-secondary">Connectez-vous à votre compte</p>
+	</div>
+
+	<div class="form-container">
+		<!-- Formulaire de connexion -->
+		<form action="#" method="post" id="loginForm">
+			<div class="mb-3">
+				<label for="email" class="form-label">E-mail ou numéro de téléphone</label>
+					<div class="input-group">
+						<span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+						<input type="email" class="form-control" id="email" name="email" placeholder="Votre@email.com" autocomplete="email" required>
+					</div>
+					<div id="email-error" class="text-danger small"></div>
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Mot de passe</label>
+				<div class="input-group">
+					<span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+					<input type="password" class="form-control" id="password-etape2" name="password" placeholder="••••••••" autocomplete="new-password" required>
+					<span class="input-group-text bg-white toggle-password"><i class="bi bi-eye"></i></span>
+				</div>
+				<div id="password-etape2-error" class="text-danger small"></div>
+			</div>
+			<div class="text-center mt-3">
+				<a href="../auth/identify.html" class="text-primary">Informations de compte oubliées ?</a>
+			</div>
+			<button type="submit" class="btn btn-primary w-100 mt-3" onclick="validerConnexion()" >Se connecter</button>
+			
+			<div class="text-center mt-3">
+				<span class="text-secondary">Vous avez déjà un compte ?</span>
+				<a href="../auth/register.html" class="fw-bold text-primary ms-1" style="text-decoration: none;">S'inscrire</a>
+			</div>
+		</form>
+	</div>
+
+	<script src="../../../assets/js/login.js"></script>
+	<script src="../../../assets/js/togglePassword.js"></script>
+</body>
+</html>

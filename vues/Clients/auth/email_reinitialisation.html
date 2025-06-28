@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap 5 -->
+    <link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+   <link href="../../../assets/icons/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../assets/css/email_style.css">
+	<title>Réinitilisation de votre email</title>
+</head>
+<body>
+	<div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+        <img src="../../../assets/images/logo_L.svg" alt="Logo" style="width: 48px; max-height: 50px;" />
+        <span class="fw-bold text-primary">LookLive</span>
+        <span style="flex: 1;"></span>
+        <span style="display: flex; align-items: center; gap: 8px; color: #222; font-size: 16px;">
+            <span>{{username}}</span>
+            <span style="background: #e5e7ea; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-person" style="color: #888; font-size: 18px;"></i>
+            </span>
+        </span>
+    </div>
+	<div class="header">
+		<h2>Réinitialisation de votre email</h2>
+    </div>
+	<div class="content p-4">
+        <p>Bonjour <strong>{{username}}</strong>,</p>
+        
+       <p>Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte. Si vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet e-mail.</p>
+        
+		 <p>Pour définir un nouveau mot de passe, voici votre code de réinitialisation :</p>
+		<div style="text-align: center; margin-bottom: 12px;">
+			<div style="display: inline-block; background: #e7f0fd; border: 1px solid #b6d4fe; border-radius: 8px; padding: 18px 48px; font-weight: bold; font-size: 1.5rem; letter-spacing: 0.2em; color: #222; margin-bottom: 6px;">
+				{{reinitialisationCode}}
+			</div>
+			<div style="color: #888; font-size: 1rem; margin-top: 4px;">Ne partagez ce code avec personne.</div>
+    	</div>
+		 <p>Ce code expirera dans <strong>5 minutes</strong>.</p>
+		<div style="text-align: left; ">
+			<div style="font-weight: bold; color: #222; font-size: 1.08rem; margin-bottom: 4px;">Si quelqu’un demande ce code</div>
+			<div style="color: #444; font-size: 1rem; margin-bottom: 18px;">
+				Ne partagez ce code avec personne, surtout si cette personne vous dit qu’elle travaille pour LookLive.
+		</div>
+		<div style="white-space: pre-line; color: #222; font-size: 1rem;">Merci,
+		Sécurité LookLive</div>
+	</div>
+	</div>
+	<div class="footer">
+        <p>© 2025 LookLive. Tous droits réservés.</p>
+        <p>
+            <a href="https://votresite.com/confidentialite" style="color: #777;">Politique de confidentialité</a> | 
+            <a href="https://votresite.com/conditions" style="color: #777;">Conditions d'utilisation</a>
+        </p>
+        <p>Vous recevez cet email parce que vous vous êtes inscrit sur LookLive.</p>
+    </div>
+</body>
+</html>

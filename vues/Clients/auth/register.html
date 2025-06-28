@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap 5 -->
+    <link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+   <link href="../../../assets/icons/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../assets/css/register.css">
+    <link rel="icon" type="image/svg+xml" href="../../../assets/images/logo_L.svg">
+	<title> S'inscrire à LookLive</title>
+</head>
+<body >
+   <div class="logo text-primary"> LookLive </div>
+	<div class="text-center">
+		<p class="text-secondary">Créez votre compte en quelques étapes simples</p>
+	</div>
+	<div class="form-container">
+		<!-- Formulaire d'inscription -->
+		<!-- Étapes du formulaire -->
+
+		<form action="#" method="post" id="multiEtapeForm">
+		 	<!-- Etape 1 -->
+			<div class="etape" id="etape-1">
+				<div class="stepper">
+					<div class="stepper-step active">
+						<div class="stepper-circle">1</div>
+						<div class="stepper-label">Infos</div>
+					</div>
+					<div class="stepper-line"></div>
+						<div class="stepper-step">
+						<div class="stepper-circle">2</div>
+						<div class="stepper-label">Compte</div>
+					</div>
+					<div class="stepper-line"></div>
+						<div class="stepper-step">
+						<div class="stepper-circle">3</div>
+						<div class="stepper-label">Validation</div>
+					</div>
+				</div>
+
+				<div class="intro-avatar text-center mb-4">
+					<div class="intro-avatar-circle mx-auto mb-2">
+						<i class="bi bi-person text-primary" style="font-size:2.2rem;"></i>
+					</div>
+				</div>
+
+				<div class="form-header">
+					<h4>Parlez-nous de vous</h4>
+					<p class="text-secondary">Commençons par vos informations de base</p>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col">
+						<label for="prenom" class="form-label">Prénom</label>
+						<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Votre prénom" autocomplete="prenom">
+						<div id="prenom-error" class="text-danger small"></div>
+					</div>
+					<div class="col">
+						<label for="nom" class="form-label">Nom</label>
+						<input type="text" class="form-control" id="nom" name="nom" placeholder="Votre nom" autocomplete="nom">
+						<div id="nom-error" class="text-danger small"></div>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="date" class="form-label">Date de naissance</label>
+					<input type="date" class="form-control" id="date" name="date">
+					<div id="date-error" class="text-danger small"></div>
+				</div>
+
+				<div class="mb-4">
+					<label for="genre" class="form-label">Genre</label>
+					<select class="form-select" id="genre" name="genre">
+						<option selected>Sélectionnez votre genre</option>
+						<option value="femme">Femme</option>
+						<option value="homme">Homme</option>
+						<option value="autre">Personnalisé</option>
+					</select>
+					<div id="genre-error" class="text-danger small"></div>
+				</div>
+
+				<button type="button" class="btn btn-primary w-100" onclick="validerEtape1()">Continuer</button>
+			</div>
+
+			<!-- Etape 2 -->
+			 <div class="etape d-none" id="etape-2">
+				<div class="stepper">
+					<div class="stepper-step">
+						<div class="stepper-circle bg-primary"><i class="bi bi-check-lg text-light"></i></div>
+						<div class="stepper-label">Infos</div>
+					</div>
+					<div class="stepper-line active"></div>
+					<div class="stepper-step active">
+						<div class="stepper-circle">2</div>
+						<div class="stepper-label">Compte</div>
+					</div>
+					<div class="stepper-line"></div>
+					<div class="stepper-step">
+						<div class="stepper-circle">3</div>
+						<div class="stepper-label">Validation</div>
+					</div>
+				</div>
+
+				<div class="intro-avatar text-center mb-4">
+					<div class="intro-avatar-circle mx-auto mb-2" style="background:#e6faef;">
+						<i class="bi bi-lock" style="font-size:2.2rem;color:#22b573;"></i>
+					</div>
+				</div>
+
+				<div class="form-header text-center mb-4">
+					<h4 class="mb-1">Créez votre compte</h4>
+					<p class="text-secondary mb-0">Choisissez vos identifiants de connexion</p>
+				</div>
+
+				<div class="mb-3">
+					<label for="email" class="form-label">Adresse email</label>
+					<div class="input-group">
+						<span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+						<input type="email" class="form-control" id="email-etape2" name="email" placeholder="Votre@email.com" autocomplete="email">
+					</div>
+					<div id="email-etape2-error" class="text-danger small"></div>
+				</div>
+
+				<div class="mb-4">
+					<label for="password" class="form-label">Mot de passe</label>
+					<div class="input-group">
+						<span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+						<input type="password" class="form-control" id="password-etape2" name="password" placeholder="••••••••" autocomplete="new-password">
+						<span class="input-group-text bg-white toggle-password"><i class="bi bi-eye"></i></span>
+					</div>
+					<div id="password-etape2-error" class="text-danger small"></div>
+				</div>
+
+				<div class="d-flex justify-content-between">
+					<button type="button" class="btn btn-outline-secondary w-45" onclick="afficherEtape(1)"><i class="bi bi-arrow-left"></i> Retour</button>
+					<button type="button" class="btn btn-primary w-45" onclick="validerEtape2()">Continuer</button>
+				</div>
+			</div>
+
+			<!-- Etape 3 -->
+			<div class="etape d-none" id="etape-3">
+				<div class="stepper">
+					<div class="stepper-step">
+						<div class="stepper-circle bg-primary"><i class="bi bi-check-lg text-light"></i></div>
+						<div class="stepper-label">Infos</div>
+					</div>
+					<div class="stepper-line active"></div>
+					<div class="stepper-step">
+					<div class="stepper-circle bg-primary"><i class="bi bi-check-lg text-light"></i></div>
+					<div class="stepper-label">Compte</div>
+					</div>
+					<div class="stepper-line active"></div>
+					<div class="stepper-step active">
+					<div class="stepper-circle">3</div>
+					<div class="stepper-label text-primary">Validation</div>
+					</div>
+				</div>
+
+				<div class="intro-avatar text-center mb-4">
+					<div class="intro-avatar-circle mx-auto mb-2" style="background:#f3f0ff;">
+						<i class="bi bi-stars" style="font-size:2.2rem;color:#a259e6;"></i>
+					</div>
+				</div>
+
+				<div class="form-header text-center mb-4">
+					<h4 class="mb-1">Presque terminé !</h4>
+					<p class="text-secondary mb-0">Vérifiez vos informations et acceptez nos conditions</p>
+				</div>
+
+				<div class="recap-box p-3 mb-3 mx-auto">
+					<div class="fw-bold mb-2">Récapitulatif de votre compte</div>
+					<div class="d-flex justify-content-between">
+						<span class="text-secondary">Nom complet:</span>
+						<span id="recap-nom" class="fw-normal"></span>
+  					</div>
+					<div class="d-flex justify-content-between">
+						<span class="text-secondary">Email:</span>
+						<span id="recap-email" class="fw-normal"></span>
+					</div>
+					<div class="d-flex justify-content-between">
+						<span class="text-secondary">Date de naissance:</span>
+						<span id="recap-date" class="fw-normal"></span>
+					</div>
+				</div>
+
+				<div class="mb-2 text-secondary small">
+				  Les personnes qui utilisent notre service ont pu importer vos coordonnées sur Facebook. <a href="#" class="text-primary">En savoir plus.</a>
+				</div>
+				<div class="mb-2 text-secondary small">
+				  En cliquant sur Créer mon compte, vous acceptez nos <a href="#" class="text-primary">Conditions générales</a>, notre <a href="#" class="text-primary">Politique de confidentialité</a> et notre <a href="#" class="text-primary">Politique d’utilisation des cookies</a>. Vous recevrez peut-être des notifications par texto de notre part et vous pouvez à tout moment vous désabonner.
+				</div>
+
+				<div class="d-flex justify-content-between">
+					<button type="button" class="btn btn-outline-secondary w-45" onclick="afficherEtape(2)"><i class="bi bi-arrow-left"></i> Retour</button>
+					<button type="button" class="btn btn-primary w-45" onclick="validerEtape3()"><i class="bi bi-person-plus"></i> Créer mon compte</button>
+				</div>
+			</div>
+
+		</form>
+		<div class="text-center mt-4 mb-2">
+			<span class="text-secondary">Vous avez déjà un compte ?</span>
+			<a href="../auth/login.html" class="fw-bold text-primary ms-1" style="text-decoration: none;">Se connecter</a>
+		</div>
+	</div>
+	
+	<!-- Gestion des étapes du formulaire -->
+	 <script src="../../../assets/js/validerEtapes.js"></script>
+	 <script src="../../../assets/js/afficherEtapes.js"></script>
+	 <script src="../../../assets/js/togglePassword.js"></script>
+	
+</body>
+</html>

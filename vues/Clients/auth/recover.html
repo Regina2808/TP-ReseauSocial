@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap 5 -->
+    <link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+   <link href="../../../assets/icons/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../assets/css/identify.css">
+    <link rel="icon" type="image/svg+xml" href="../../../assets/images/logo_L.svg">
+	<title>LookLive</title>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-white shadow-sm mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="../auth/login.html">
+                <span class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+                    <img src="../../../assets/images/logo_L.svg" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;" />
+                </span>
+                <span class="fw-bold text-primary">LookLive</span>
+            </a>
+        </div>
+    </nav>
+
+	<div class="container py-5">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-md-6 mb-4">
+				<h1><strong>Vérifiez vos <span class="text-primary">e-mails</span></strong></h1>
+				<p>Merci de vérifier dans vos e-mails que vous avez reçu un message avec un code de réinitialisation. 
+					<br> Nous avons envoyé votre code à <span id="user-email" class="fw-bold"></span>
+				</p>
+				<ul class="list-unstyled mt-4">
+					<li class="mb-2"><span class="text-success me-2"><i class="bi bi-check-circle-fill"></i></span>Sécurité avancée</li>
+					<li class="mb-2"><span class="text-success me-2"><i class="bi bi-check-circle-fill"></i></span>Performance optimale</li>
+					<li><span class="text-success me-2"><i class="bi bi-check-circle-fill"></i></span>Communauté active</li>
+				</ul>
+			</div>
+
+			<div class="col-md-5">
+				<div class="form-box">
+					<h4><strong>Entrez le code de sécurité</strong></h4>
+					<p>Merci de vérifier dans vos e-mails que vous avez reçu un message avec votre code. <br>
+					Celui-ci est composé de 6 chiffres </p>
+					<div class="input-group mb-3">
+						<span class="input-group-text"><i class="bi bi-lock"></i></span>
+						<input type="text" class="form-control" placeholder="Entrez le code " id="code" autocomplete="code">
+						<div id="code-error" class="text-danger small"></div>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<a href="../auth/recover.html" class="text-primary" style="font-size: 1rem;">Code non reçu ?</a>
+						<button class="btn btn-outline-secondary" onclick="window.location.href='login.html'">Annuler</button>
+						<button class="btn btn-primary" id="search-btn" onclick="validerContinuer()">Continuer</button>
+        			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../../assets/js/recover.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap 5 -->
+    <link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+   <link href="../../../assets/icons/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../assets/css/identify.css">
+    <link rel="icon" type="image/svg+xml" href="../../../assets/images/logo_L.svg">
+	<title>Se connecter à LookLive</title>
+	<style>
+/* Augmenter la taille des cartes */
+.user-card, .add-account-card {
+  height: 160px !important;
+  min-height: 160px !important;
+  transition: transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+  box-shadow: 0 1px 4px #0001;
+}
+.user-card:hover, .add-account-card:hover {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow: 0 8px 24px #0002;
+  z-index: 3;
+}
+.user-alert-hover {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 220px;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+	<div class="container py-5" style="min-height: 100vh;">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-md-6 mb-4">
+				<h1><strong><span class="text-primary">LookLive</span></strong></h1>
+				<h2>Connexions récentes</h2>
+				<p>Cliquez sur votre image ou sur Ajouter un compte.</p>
+
+				<!-- Alerte Bootstrap -->
+				<div class="alert alert-primary alert-dismissible fade show mb-4" role="alert" style="max-width: 400px;">
+				  À la prochaine connexion, cliquez sur votre photo. Pour supprimer un compte de cette page, cliquez ici.
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+				</div>
+
+				<div class="d-flex flex-row gap-3 mb-4" style="flex-wrap: wrap;">
+					<!-- Carte utilisateur 1 -->
+					<div class="card text-center position-relative user-card" style="width: 120px; min-width: 120px; border-radius: 12px; border: 1px solid #e0e0e0; overflow: hidden; background: #e5e7ea;">
+						<!-- Bouton X Bootstrap -->
+						<button type="button" class="btn-close position-absolute top-0 start-0 m-2 close-btn" aria-label="Close" style="z-index:2;"></button>
+						<div class="card-body p-2 d-flex flex-column align-items-center justify-content-center" style="padding-bottom: 0 !important; background: #e5e7ea;">
+							<i class="bi bi-person" style="font-size: 60px; color: #6c6c6c;"></i>
+						</div>
+						<div class="card-footer bg-white p-2" style="border-top: none; font-size: 1rem; color: #222;">Laura</div>
+					</div>
+					<!-- Carte utilisateur 2 -->
+					<div class="card text-center position-relative user-card" style="width: 120px; min-width: 120px; border-radius: 12px; border: 1px solid #e0e0e0; overflow: hidden; background: #e5e7ea;">
+						<!-- Bouton X Bootstrap -->
+						<button type="button" class="btn-close position-absolute top-0 start-0 m-2 close-btn" aria-label="Close" style="z-index:2;"></button>
+						<div class="card-body p-2 d-flex flex-column align-items-center justify-content-center" style="padding-bottom: 0 !important; background: #e5e7ea;">
+							<i class="bi bi-person" style="font-size: 60px; color: #6c6c6c;"></i>
+						</div>
+						<div class="card-footer bg-white p-2" style="border-top: none; font-size: 1rem; color: #222;">Fifi</div>
+					</div>
+					<!-- Carte Ajouter un compte -->
+					<div class="card text-center add-account-card" style="width: 120px; min-width: 120px; border-radius: 12px; border: 1px solid #e0e0e0; background: #f0f2f5; overflow: hidden; cursor: pointer;">
+						<div class="card-body p-2 d-flex flex-column align-items-center justify-content-center" style="height: 80px; background: #f0f2f5;">
+							<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #1877f2; border-radius: 50%;">
+								<i class="bi bi-plus" style="font-size: 24px; color: #fff;"></i>
+							</span>
+						</div>
+    					<div class="card-footer bg-white p-2" style="border-top: none; color: #1877f2; font-size: 1rem;">Ajouter un compte</div>
+					</div>
+				</div>
+			
+			</div>
+
+			<div class="col-md-5">
+				<div class="form-box">
+					<!-- Formulaire de connexion -->
+					<form action="#" method="post" id="loginForm">
+						<div class="mb-3">
+							<label for="email" class="form-label">E-mail ou numéro de téléphone</label>
+								<div class="input-group">
+									<span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+									<input type="email" class="form-control" id="email" name="email" placeholder="Votre@email.com" autocomplete="email" required>
+								</div>
+								<div id="email-error" class="text-danger small"></div>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Mot de passe</label>
+							<div class="input-group">
+								<span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+								<input type="password" class="form-control" id="password-etape2" name="password" placeholder="••••••••" autocomplete="new-password" required>
+								<span class="input-group-text bg-white toggle-password"><i class="bi bi-eye"></i></span>
+							</div>
+							<div id="password-etape2-error" class="text-danger small"></div>
+						</div>
+						<div class="text-center mt-3">
+							<a href="../auth/identify.html" class="text-primary">Informations de compte oubliées ?</a>
+						</div>
+						<button type="submit" class="btn btn-primary w-100 mt-3" onclick="validerConnexion()" >Se connecter</button>
+						
+						<div class="text-center mt-3">
+							<span class="text-secondary">Vous avez déjà un compte ?</span>
+							<a href="../auth/register.html" class="fw-bold text-primary ms-1" style="text-decoration: none;">S'inscrire</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modale Bootstrap pour l'ajout d'un compte -->
+<div class="modal fade" id="addAccountModal" tabindex="-1" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-center" id="addAccountModalLabel">Se connecter à LookLive</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="modal-login-form" autocomplete="off">
+          <div class="mb-3">
+            <label for="modal-email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="modal-email" placeholder="Entrez votre e-mail">
+            <div class="text-danger small" id="modal-email-error"></div>
+          </div>
+          <div class="mb-3">
+            <label for="modal-password" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="modal-password" placeholder="Entrez votre mot de passe">
+            <div class="text-danger small" id="modal-password-error"></div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+          <div class="text-center mt-2">
+            <a href="../auth/identify.html" class="link-primary" style="font-size: 0.95rem;">Mot de passe oublié ?</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../../assets/js/bootstrap.js"></script>
+<script src="../../../assets/js/login.js"></script>
+<script src="../../../assets/js/togglePassword.js"></script>
+	<script>
+	// Sélectionner tous les boutons de fermeture
+	const closeButtons = document.querySelectorAll('.close-btn');
+
+	// Pour chaque bouton trouvé
+	closeButtons.forEach(function(button) {
+		// Ajoute un écouteur d'événement au clic
+		button.addEventListener('click', function(event) {
+			// Empêche l'événement de remonter dans le DOM
+			event.stopPropagation();
+			
+			// Trouve la carte utilisateur parente
+			const userCard = this.closest('.user-card');
+			
+			// Si la carte existe, on la supprime
+			if (userCard) {
+				userCard.remove();
+			}
+		});
+	});
+	// Action sur Ajouter un compte : ouvrir la modale Bootstrap
+	const addCard = document.querySelector('.add-account-card');
+	if(addCard) {
+		addCard.addEventListener('click', function() {
+			var modal = new bootstrap.Modal(document.getElementById('addAccountModal'));
+			modal.show();
+		});
+	}
+
+	// Validation pour la modale d'ajout de compte
+	function validerEmailModal(input, errorId) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const value = input.value.trim();
+  const error = document.getElementById(errorId);
+  if (value && !regex.test(value)) {
+    error.textContent = "Veuillez entrer une adresse email valide.";
+    return false;
+  } else {
+    error.textContent = "";
+    return true;
+  }
+}
+function validerMotDePasseModal(input, errorId) {
+  const value = input.value;
+  const error = document.getElementById(errorId);
+  if (value && value.length < 6) {
+    error.textContent = "Le mot de passe doit contenir au moins 6 caractères.";
+    return false;
+  } else {
+    error.textContent = "";
+    return true;
+  }
+}
+function validerConnexionModal() {
+  document.getElementById('modal-email-error').textContent = '';
+  document.getElementById('modal-password-error').textContent = '';
+  const champEmail = document.getElementById('modal-email');
+  const passwordInput = document.getElementById('modal-password');
+  let valid = true;
+  if (!champEmail.value.trim()) {
+    document.getElementById('modal-email-error').textContent = "L'adresse email est requise.";
+    valid = false;
+  } else if (!validerEmailModal(champEmail, 'modal-email-error')) {
+    valid = false;
+  }
+  if (!passwordInput.value.trim()) {
+    document.getElementById('modal-password-error').textContent = 'Le mot de passe est requis.';
+    valid = false;
+  } else if (!validerMotDePasseModal(passwordInput, 'modal-password-error')) {
+    valid = false;
+  }
+  return valid;
+}
+document.getElementById('modal-login-form').addEventListener('submit', function(e) {
+  if (!validerConnexionModal()) {
+    e.preventDefault();
+  }
+});
+	</script>
+</body>
+</html>
