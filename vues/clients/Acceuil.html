@@ -12,8 +12,7 @@
 <!-- Leaflet JS -->
  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <!-- Geocoder CSS & JS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
 
   
 
@@ -246,43 +245,25 @@
 </aside>
 
       <!-- main de l'utilisateur qui publie /zone principale-->
-
-
       <main class="col-md-6">
 
-         <div class=" col-md-4 b icone-nav">
-                   <!-- carrousel  -->
-                     <div class="carousel slide shadow-sm rounded mb-4" id="carousel" data-ride="carousel">
-          <div class="carousel-inner">
-             <div class="carousel-item active">
-                <div class="position-relative d-inline-block">
-                    <img src="/assets/image/mangas1.png" class="img-fluid rounded" alt="Image publication">
+         <div class="card shadow-sm mb-3">
+            <div class="card-body p-2">
+              <div class="d-flex overflow-auto" id="storyBar">
+                <!-- Stories seront injectées ici -->
+              <div class="text-center mx-2">
+                    <label for="storyFileInput" class="d-block" style="cursor: pointer;">
+                      <div class="rounded-circle bg-light border border-secondary d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="bi bi-plus text-primary " style="font-size: 24px;"></i>
+                      </div>
+                    </label>
+                    <small class="d-block mt-1 text-muted">Ajouter</small>
+                    <input type="file" id="storyFileInput" accept="image/*,video/*" hidden>
+               </div>
 
-                    <button onclick="document.getElementById('carouselInput').click();"
-                            class="btn p-0 border-0 shadow-none bouton-ajout position-absolute"
-                            style="top: 10px; right: 10px; background: transparent; width: 40px; height: 40px;">
-                      <i class="bi bi-plus-circle" style="font-size: 1.8rem; color: #edf0f1;"></i>
-                    </button>
-
-                      <input type="file" accept="image/*" id="carouselInput" class="d-none" onchange="addCarouselImage(event)">
-                 </div>
-
-             </div>
-            <div class="carousel-item ">
-              <img src="/assets/image/mangas.png" class="d-block w-100 rounded shadow-sm" alt="Image 1">
+              </div>
             </div>
-            <div class="carousel-item">
-              <img src="/assets/image/logolooklive.png" class="d-block w-100 rounded shadow-sm" alt="Image 2">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carousel" data-slide="prev">
-            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2"></span>
-          </a>
-          <a class="carousel-control-next" href="#carousel" data-slide="next">
-            <span class="carousel-control-next-icon bg-dark rounded-circle p-2"></span>
-          </a>
-        </div>
-        </div>
+         </div>
 
            <!--  Formulaire de publication -->
                 <div class="card shadow-sm mb-4 publication-form">
@@ -314,7 +295,14 @@
             <div class="dropdown flex-fill m-1">
               <button class="btn btn-light btn-block d-flex align-items-center justify-content-center icon-option dropdown-toggle" type="button" id="dropdownHumeur" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="bi bi-emoji-smile-fill text-primary mr-2"></i> Humeur
-              </button id="postMood">
+              </button>
+                <div class="dropdown-menu p-2" aria-labelledby="dropdownHumeur" id="moodMenu">
+                      <button class="dropdown-item mood-option">😊 Heureux</button>
+                      <button class="dropdown-item mood-option">😢 Triste</button>
+                      <button class="dropdown-item mood-option">😡 Énervé</button>
+                      <button class="dropdown-item mood-option">😍 Amoureux</button>
+                      <button class="dropdown-item mood-option">😴 Fatigué</button>
+                 </div>
               <input type="hidden" id="postMood">
             </div>
 
@@ -390,13 +378,103 @@
   </div>
 </div>
 
+<!-- vue de la storie a l'ecrans -->
+
+<!-- Aperçu de la story -->
+<div id="storyPreviewModal" class="d-none position-fixed w-100 h-100 top-0 left-0 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center" style="z-index: 1050;">
+  <div class="bg-white rounded p-3" style="max-width: 400px; width: 90%;">
+    <div class="text-right">
+      <button class="btn btn-sm btn-outline-secondary" onclick="closeStoryPreview()">✖</button>
+    </div>
+    <div id="storyPreviewMedia" class="mb-3 text-center"></div>
+    <input type="text" id="storyPreviewCaption" class="form-control mb-2" placeholder="Ajouter un commentaire...">
+    <button class="btn btn-primary btn-block" id="publishStoryBtn">Publier</button>
+  </div>
+</div>
+
+
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
  <script>
-    
- 
- const postInput = document.getElementById('postInput');
+
+  //selection vue aperçu et ajout de storie 
+ let selectedStoryFile = null;
+  let selectedStoryType = null;
+
+document.getElementById('storyFileInput').addEventListener('change', (e) => {
+  selectedStoryFile = e.target.files[0];
+  if (!selectedStoryFile) return;
+
+  selectedStoryType = selectedStoryFile.type.startsWith('video') ? 'video' : 'image';
+
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const preview = document.getElementById('storyPreviewMedia');
+    preview.innerHTML = selectedStoryType === 'image'
+      ? `<img src="${ev.target.result}" class="img-fluid rounded">`
+      : `<video controls class="w-100 rounded"><source src="${ev.target.result}" type="${selectedStoryFile.type}"></video>`;
+
+    document.getElementById('storyPreviewModal').classList.remove('d-none');
+  };
+  reader.readAsDataURL(selectedStoryFile);
+});
+
+document.getElementById('publishStoryBtn').addEventListener('click', () => {
+  const caption = document.getElementById('storyPreviewCaption').value.trim();
+  if (!selectedStoryFile) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const storyData = {
+      id: "story-" + Date.now(),
+      username: "Gildas",
+      image: selectedStoryType === 'image' ? e.target.result : '',
+      video: selectedStoryType === 'video' ? e.target.result : '',
+      caption,
+      timestamp: Date.now()
+    };
+    renderStory(storyData);
+    saveStoryToStorage(storyData);
+    closeStoryPreview();
+  };
+  reader.readAsDataURL(selectedStoryFile);
+});
+
+function closeStoryPreview() {
+  document.getElementById('storyPreviewModal').classList.add('d-none');
+  document.getElementById('storyPreviewMedia').innerHTML = '';
+  document.getElementById('storyPreviewCaption').value = '';
+  selectedStoryFile = null;
+  selectedStoryType = null;
+}
+
+//recuper et affiche la storie 
+
+function renderStory(storyData) {
+  const { id, username, image, video } = storyData;
+
+  const story = document.createElement('div');
+  story.className = 'text-center mx-2';
+  story.style.cursor = 'pointer';
+  story.innerHTML = `
+    <div class="position-relative">
+      <img src="${image || '/assets/image/video-icon.png'}" class="rounded-circle border border-primary" width="60" height="60" alt="${username}">
+    </div>
+    <small class="d-block mt-1 text-muted">${username}</small>
+  `;
+
+  story.addEventListener('click', () => {
+    openStoryViewer([storyData]);
+  });
+
+  document.getElementById('storyBar').appendChild(story);
+}
+
+
+ //insertion de publication 
+const postInput = document.getElementById('postInput');
 const publishBtn = document.getElementById('publishBtn');
 const postContainer = document.getElementById('postContainer');
 const postImage = document.getElementById('postImage');
@@ -443,7 +521,7 @@ publishBtn.addEventListener('click', () => {
         <div class="comment-section d-none">
           <ul class="list-unstyled comment-list mb-3"></ul>
           <div class="d-flex align-items-center">
-            <img src="/assets/image/user1.jpg" class="rounded-circle mr-2" width="40" height="40" alt="user">
+            <img src="/assets/image/mangas1.png" class="rounded-circle mr-2" width="40" height="40" alt="user">
             <input type="text" class="form-control rounded-pill mr-2 comment-input" placeholder="Ajouter un commentaire...">
             <button class="btn btn-primary rounded-circle send-comment"><i class="bi bi-send-fill text-white"></i></button>
           </div>
@@ -471,21 +549,53 @@ publishBtn.addEventListener('click', () => {
 
     let likes = 0;
     let dislikes = 0;
+    let userReaction = null; // like ou dislike est null
 
-    likeBtn.addEventListener('click', () => {
-      likes++;
-      likeCount.textContent = likes;
-    });
+   
+likeBtn.addEventListener('click', () => {
+  if (userReaction === 'like') {
+    // Annuler le like
+    likes--;
+    userReaction = null;
+  } else {
+    if (userReaction === 'dislike') {
+      // Retirer le dislike précédent
+      dislikes--;
+    }
+    likes++;
+    userReaction = 'like';
+  }
+  updateCounts();
+});
 
-    dislikeBtn.addEventListener('click', () => {
-      dislikes++;
-      dislikeCount.textContent = dislikes;
-    });
+dislikeBtn.addEventListener('click', () => {
+  if (userReaction === 'dislike') {
+    // Annuler le dislike
+    dislikes--;
+    userReaction = null;
+  } else {
+    if (userReaction === 'like') {
+      // Retirer le like précédent
+      likes--;
+    }
+    dislikes++;
+    userReaction = 'dislike';
+  }
+  updateCounts();
+});
+//mise a jour du compte 
+function updateCounts() {
+  likeCount.textContent = likes;
+  dislikeCount.textContent = dislikes;
+}
 
+
+//cachier la liste des commentaire 
     toggleBtn.addEventListener('click', () => {
       commentSection.classList.toggle('d-none');
     });
-
+      
+ //envoie du commentaire    
     sendBtn.addEventListener('click', () => {
       const text = commentInput.value.trim();
       if (text !== '') {
@@ -504,6 +614,7 @@ publishBtn.addEventListener('click', () => {
     });
   };
 
+  //creation de la publication selon le fichier 
   if (imageFile) {
     const reader = new FileReader();
     reader.onload = e => {
@@ -526,6 +637,8 @@ publishBtn.addEventListener('click', () => {
 });
 
 
+
+// class modal de  la map 
   let map;
   let marker;
 
@@ -559,6 +672,19 @@ publishBtn.addEventListener('click', () => {
     }
     setTimeout(() => map.invalidateSize(), 200); // Corrige l'affichage
   });
+
+   const moodOptions = document.querySelectorAll('.mood-option');
+   const postmood = document.getElementById('postMood');
+    const moodButton = document.getElementById('dropdownHumeur');
+
+moodOptions.forEach(option => {
+  option.addEventListener('click', () => {
+    const mood = option.textContent.trim();
+    postMood.value = mood;
+    moodButton.innerHTML = `<i class="bi bi-emoji-smile-fill text-primary mr-2"></i> ${mood}`;
+  });
+});
+
 
  </script>
 </body>

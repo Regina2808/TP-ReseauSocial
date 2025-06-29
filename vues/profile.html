@@ -8,28 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/profile.css">
     
+ 
 </head>
-<script>
-// Gestion spécifique des onglets pour la page profil
-document.addEventListener('DOMContentLoaded', function() {
-    // Activer l'onglet Publications si nécessaire
-    if (window.location.hash === '#posts' || localStorage.getItem('activeTab') === '#posts') {
-        const tabTrigger = document.querySelector('a[href="#posts"]');
-        if (tabTrigger) {
-            const tab = new bootstrap.Tab(tabTrigger);
-            tab.show();
-            
-            // Faire défiler vers la section
-            document.querySelector('#posts').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-        localStorage.removeItem('activeTab');
-    }
-});
-</script>
+
 <body>
     <div class="container py-4">
         <!-- En-tête du profil -->
@@ -385,8 +367,54 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         </div>
 
+        <script>
+            // Gestion spécifique des onglets pour la page profil
+            document.addEventListener('DOMContentLoaded', function() {
+                // Activer l'onglet Publications si nécessaire
+                if (window.location.hash === '#posts' || localStorage.getItem('activeTab') === '#posts') {
+                    const tabTrigger = document.querySelector('a[href="#posts"]');
+                    if (tabTrigger) {
+                        const tab = new bootstrap.Tab(tabTrigger);
+                        tab.show();
+                        
+                        // Faire défiler vers la section
+                        document.querySelector('#posts').scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                    localStorage.removeItem('activeTab');
+                }
+            });
+
+
+            // Données des photos par défaut
+const defaultProfilePics = [
+    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+];
+
+const defaultCoverPhotos = [
+    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+];
+
+// Photos fixes de la galerie
+const galleryPhotos = [
+    "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+];
+
+     </script>
+
     <!-- Bootstrap JS et dépendances -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/profile.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>   
 </body>
 </html>
