@@ -4,73 +4,8 @@
   <meta charset="UTF-8" />
   <title>Photos de Laura</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-   
-  <style>
-    body {
-  margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
-  background-color: #f0f2f5;
-}
-
-h2 {
-  font-size: 24px;
-}
-
-/* Onglets */
-.nav-tabs .nav-link {
-  font-weight: 500;
-  color: #050505;
-  border: none;
-  border-bottom: 2px solid transparent;
-}
-
-.nav-tabs .nav-link.active {
-  color: #1877f2;
-  border-color: #1877f2;
-  background-color: transparent;
-}
-
-/* Cartes photo */
-.photo-card {
-  position: relative;
-  cursor: zoom-in;
-  transition: transform 0.2s ease;
-}
-
-.photo-card:hover {
-  transform: scale(1.02);
-}
-
-.photo-card img {
-  border-radius: 6px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-.photo-card .caption {
-  font-size: 13px;
-  color: #6c757d;
-  text-align: center;
-  margin-top: 4px;
-}
-
-
-/* Aperçu lors de l’ajout */
-#preview img {
-  max-width: 100%;
-  max-height: 200px;
-  margin-top: 10px;
-  border-radius: 6px;
-}
-
-/* Responsive ajusté */
-@media (max-width: 576px) {
-  h2 {
-    font-size: 20px;
-  }
-}
-
-  </style>
-
+   <link rel="stylesheet" href="../../../assets/css/photo.css">
+  
 </head>
 <body class="bg-light">
 
@@ -148,100 +83,9 @@ h2 {
   </div>
 </div>
 
-
+ <script src="../../../assets/js/photo.js"></script>
 
 <!-- Script Bootstrap -->
- <script>
-   document.addEventListener("DOMContentLoaded", () => {
-  const tabs = document.querySelectorAll("#photoTabs .nav-link");
-  const photoGrid = document.getElementById("photo-grid");
-  const albumSection = document.getElementById("album-section");
-
-  // Gestion des onglets
-  tabs.forEach(tab => {
-    tab.addEventListener("click", (e) => {
-      e.preventDefault();
-      tabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-
-      const tabName = tab.dataset.tab;
-      photoGrid.classList.toggle("d-none", tabName !== "all");
-      albumSection.classList.toggle("d-none", tabName === "all");
-    });
-  });
-
-  // Visionneuse Bootstrap
-  const modal = new bootstrap.Modal(document.getElementById("photoModal"));
-  const modalImg = document.getElementById("modalImage");
-
-  function bindModalToImage(img) {
-    img.addEventListener("click", () => {
-      modalImg.setAttribute("src", img.getAttribute("data-src"));
-      modal.show();
-    });
-  }
-
-  document.querySelectorAll(".photo-card img").forEach(bindModalToImage);
-
-  // Ajout de photo par utilisateur
-  const uploadForm = document.getElementById("uploadForm");
-  const mediaInput = document.getElementById("mediaInput");
-  const usernameInput = document.getElementById("usernameInput");
-  const preview = document.getElementById("preview");
-
-  mediaInput.addEventListener("change", () => {
-    const file = mediaInput.files[0];
-    preview.innerHTML = "";
-
-    if (file && file.type.startsWith("image/")) {
-      const img = document.createElement("img");
-      img.src = URL.createObjectURL(file);
-      img.alt = "aperçu";
-      preview.appendChild(img);
-    } else {
-      preview.innerHTML = "<div class='text-muted'>Prévisualisation non disponible</div>";
-    }
-  });
-
-  uploadForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const file = mediaInput.files[0];
-    const username = usernameInput.value.trim();
-    if (!file || !username) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      const col = document.createElement("div");
-      col.className = "col-6 col-md-4 col-lg-3 photo-card";
-
-      const img = document.createElement("img");
-      img.src = reader.result;
-      img.alt = `Photo de ${username}`;
-      img.className = "img-fluid rounded";
-      img.setAttribute("data-src", reader.result);
-
-      const caption = document.createElement("div");
-      caption.className = "caption text-center text-muted small mt-1";
-      caption.textContent = `Ajouté par ${username}`;
-
-      col.appendChild(img);
-      col.appendChild(caption);
-      photoGrid.prepend(col);
-
-      bindModalToImage(img);
-
-      uploadForm.reset();
-      preview.innerHTML = "";
-      bootstrap.Modal.getInstance(document.getElementById("uploadModal")).hide();
-    };
-
-    reader.readAsDataURL(file);
-  });
-});
-
- </script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
