@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook Messenger</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main-container">
+    <!-- Colonne de gauche : Conversations -->
+    <div class="conversations-panel">
+      <div class="panel-header">
+        <div class="user-info">
+          <div class="user-avatar avatar-default avatar-color-0">ME</div>
+          <span class="messenger-title">
+            <span class="material-symbols-outlined messenger-logo">bolt</span>
+            Messenger
+          </span>
+        </div>
+        <div class="panel-actions">
+          <span class="material-symbols-outlined">chat</span>
+          <span class="material-symbols-outlined" id="conversation-settings">more_vert</span>
+          <div class="settings-dropdown">
+            <div class="settings-item">Nouvelle conversation</div>
+            <div class="settings-item">Paramètres du profil</div>
+            <div class="settings-item">Aide et assistance</div>
+            <div class="settings-item">Déconnexion</div>
+          </div>
+        </div>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Rechercher dans Messenger..." />
+        <span class="material-symbols-outlined">search</span>
+      </div>
+      <div class="conversation-filters">
+        <button class="filter-btn active">Tout</button>
+        <button class="filter-btn">Non lu</button>
+        <button class="filter-btn">Groupe</button>
+      </div>
+      <div class="conversations-list">
+        <div class="conversation unread">
+          <div class="conversation-avatar avatar-default avatar-color-0">ME</div>
+          <div class="conversation-details">
+            <div class="conversation-header">
+              <div class="conversation-name">Moi</div>
+              <div class="conversation-time">12:00</div>
+            </div>
+            <div class="conversation-last-message">Bienvenue sur Messenger !</div>
+          </div>
+        </div>
+        <div class="conversation group">
+          <div class="conversation-avatar avatar-default avatar-color-7">G1</div>
+          <div class="conversation-details">
+            <div class="conversation-header">
+              <div class="conversation-name">Groupe 1</div>
+              <div class="conversation-time">09:15</div>
+            </div>
+            <div class="conversation-last-message">Discussion de groupe active.</div>
+          </div>
+        </div>
+        <div class="conversation active">
+          <div class="conversation-avatar avatar-default avatar-color-1">AB</div>
+          <div class="conversation-details">
+            <div class="conversation-header">
+              <div class="conversation-name">Alice Bob</div>
+              <div class="conversation-time">12:45</div>
+            </div>
+            <div class="conversation-last-message">Salut !</div>
+          </div>
+        </div>
+        <div class="conversation">
+          <div class="conversation-avatar avatar-default avatar-color-2">CD</div>
+          <div class="conversation-details">
+            <div class="conversation-header">
+              <div class="conversation-name">Charlie Doe</div>
+              <div class="conversation-time">11:04</div>
+            </div>
+            <div class="conversation-last-message">À plus tard.</div>
+          </div>
+        </div>
+        <div class="conversation">
+          <div class="conversation-avatar avatar-default avatar-color-3">MP</div>
+          <div class="conversation-details">
+            <div class="conversation-header">
+              <div class="conversation-name">Maryla Poli</div>
+              <div class="conversation-time">10:30</div>
+            </div>
+            <div class="conversation-last-message">Je comprends les circonstances</div>
+          </div>
+        </div>
+       <div class="conversation">
+  <div class="conversation-avatar avatar-default avatar-color-2">LQ</div>
+  <div class="conversation-details">
+    <div class="conversation-header">
+      <div class="conversation-name">Lauri Queni</div>
+      <div class="conversation-time">11:00</div>
+    </div>
+    <div class="conversation-last-message">Salut</div>
+  </div>
+</div>
+<div class="conversation">
+  <div class="conversation-avatar avatar-default avatar-color-2">ML</div>
+  <div class="conversation-details">
+    <div class="conversation-header">
+      <div class="conversation-name">Mira Lissa</div>
+      <div class="conversation-time">10:30</div>
+    </div>
+    <div class="conversation-last-message">Tu m'envoie le document quoi?</div>
+  </div>
+</div>
+<div class="conversation">
+  <div class="conversation-avatar avatar-default avatar-color-2">PL</div>
+  <div class="conversation-details">
+    <div class="conversation-header">
+      <div class="conversation-name">Paula Lopo</div>
+      <div class="conversation-time">08:26</div>
+    </div>
+    <div class="conversation-last-message">Pouquoi?</div>
+  </div>
+</div>
+        <!-- Ajoute d'autres .conversation ici -->
+      </div>
+    </div>
+
+    <!-- Colonne centrale : Chat -->
+    <div class="chat-panel">
+      <!-- PAGE NEUTRE -->
+      <div class="chat-empty" id="chat-empty" style="display: flex;">
+        <div class="chat-empty-content">
+          <span class="material-symbols-outlined" style="font-size:48px;color:#0084ff;">forum</span>
+          <h2>Bienvenue sur Messenger</h2>
+          <p>Sélectionnez une conversation à gauche pour démarrer une discussion.</p>
+        </div>
+      </div>
+      <!-- DISCUSSION -->
+      <div id="chat-content" style="display: none;">
+        <div class="chat-header">
+          <div class="chat-user">
+            <div class="chat-avatar" id="chat-avatar">AB</div>
+            <div class="chat-info">
+              <div class="chat-name" id="chat-name">Alice Bob</div>
+              <div class="chat-status" id="chat-status">En ligne</div>
+            </div>
+          </div>
+          <div class="chat-actions">
+            <span class="material-symbols-outlined">call</span>
+            <span class="material-symbols-outlined">videocam</span>
+            <span class="material-symbols-outlined">info</span>
+          </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <!-- Les messages s'affichent ici dynamiquement -->
+        </div>
+        <div class="chat-input">
+          <span class="material-symbols-outlined attachment-btn">attach_file</span>
+          <span class="material-symbols-outlined">mic</span>
+          <span class="material-symbols-outlined">mood</span>
+          <span class="material-symbols-outlined">gif_box</span>
+          <span class="material-symbols-outlined">photo_camera</span>
+          
+          <input type="text" placeholder="Écris un message..." />
+          <span class="material-symbols-outlined send-btn">send</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonne 3 : Profil/Infos discussion -->
+    <div class="profile-panel" id="profile-panel" style="display:none;">
+      <div class="profile-header">
+        <span class="material-symbols-outlined close-profile" id="close-profile">close</span>
+        <div class="profile-large avatar-default avatar-color-1" id="profile-avatar">AB</div>
+        <div class="profile-name" id="profile-name">Alice Bob</div>
+      </div>
+      <div class="profile-actions">
+        <div class="profile-action">
+          <span class="material-symbols-outlined">person</span>
+          <div>Profil</div>
+        </div>
+        <div class="profile-action">
+          <span class="material-symbols-outlined">notifications</span>
+          <div>Notifications</div>
+        </div>
+        <div class="profile-action">
+          <span class="material-symbols-outlined">search</span>
+          <div>Recherche</div>
+        </div>
+      </div>
+      <div class="profile-sections">
+        <div class="profile-section">
+          <div class="section-header">
+            <span>Informations sur la discussion</span>
+            <span class="material-symbols-outlined chevron">expand_more</span>
+          </div>
+          <div class="section-content">Détails sur la discussion...</div>
+        </div>
+        <div class="profile-section">
+          <div class="section-header">
+            <span>Personnaliser la discussion</span>
+            <span class="material-symbols-outlined chevron">expand_more</span>
+          </div>
+          <div class="section-content">Options de personnalisation...</div>
+        </div>
+        <div class="profile-section">
+          <div class="section-header">
+            <span>Fichiers et contenus média</span>
+            <span class="material-symbols-outlined chevron">expand_more</span>
+          </div>
+          <div class="section-content">Liste des fichiers et médias...</div>
+        </div>
+        <div class="profile-section">
+          <div class="section-header">
+            <span>Confidentialité et assistance</span>
+            <span class="material-symbols-outlined chevron">expand_more</span>
+          </div>
+          <div class="section-content">Aide et paramètres de confidentialité...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu des réactions caché -->
+     
+ <div id="reaction-menu" class="reaction-menu" style="display:none;">
+    <span class="reaction" >👍</span>
+    <span class="reaction">❤️</span>
+    <span class="reaction">😂</span>
+    <span class="reaction">😮</span>
+    <span class="reaction">😢</span>
+    <span class="reaction">😡</span>
+  </div>
+
+  <script src="script.js"></script>
+   
+</body>
+</html>
